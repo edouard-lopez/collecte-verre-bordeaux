@@ -31,7 +31,15 @@ Start playing !
 
 ## Want to scaffold a similar project ?
 
-This project use [Polymap library](http://leafletjs.com/) to support the interaction with the map.
+### Tools: GDAL (Geospatial Data Abstraction Library)
+
+To manipulate Shapefile, you need to have [`ogr2ogr`](http://www.gdal.org/ogr2ogr.html) command line, install [GDAL library](http://www.gdal.org/) for that:
+```bash
+sudo apt-get install gdal-bin
+```
+
+### JavaScript Libraries
+
 
 So start by installing [Gulp webapp generator](https://www.npmjs.org/package/generator-gulp-webapp) for `yeoman`:
 ```bash
@@ -44,10 +52,15 @@ mkdir my-map-app && cd my-map-app
 yo gulp-webapp
 ```
 Then install others dependencies:
+
+* I'm using [Polymaps for interactive map](http://polymaps.org/) ;
+* and [`d3.js` for the dataviz](http://d3js.org/).
+
 ```bash
 npm install --save-dev topojson generator-gulp-webapp underscore gulp gulp-sass
 bower install --save polymaps topojson font-awesome d3 d3-plugins
 ```
+
 Finish by running `gulp` for building and gulp watch for preview :
 ```bash
 gulp watch
