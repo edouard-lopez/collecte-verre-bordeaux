@@ -87,7 +87,11 @@ gulp.task('connect', function () {
         });
 });
 
-gulp.task('serve', ['connect'], function () {
+/*
+* @custom: add dependencies
+* 	* wiredep
+*/
+gulp.task('serve', ['wiredep', 'connect'], function () {
     require('opn')('http://localhost:9000');
 });
 
