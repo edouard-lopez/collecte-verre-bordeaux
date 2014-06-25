@@ -88,5 +88,6 @@ install:
 	sudo npm install -g topojson underscore gulp generator-gulp-webapp
 	@printf "Install project-wide (Ubuntu)…\n"
 	npm install --save-dev topojson generator-leaflet underscore gulp
+	npm install --save-dev gulp-{usemin,uglify,minify-{html,css},rev}
 	yo gulp-webapp
 	bower install --save polymaps topojson font-awesome d3 d3-plugins

@@ -95,6 +95,25 @@ gulp.task('serve', ['wiredep', 'connect'], function () {
     require('opn')('http://localhost:9000');
 });
 
+/*
+	@custom: usemin
+ */
+gulp.task('usemin', function() {
+	var usemin = require('gulp-usemin');
+	var uglify = require('gulp-uglify');
+	var minifyHtml = require('gulp-minify-html');
+	var minifyCss = require('gulp-minify-css');
+	var rev = require('gulp-rev');
+
+  gulp.src('./*.html')
+    .pipe(usemin({
+      css: [minifyCss(), 'concat'],
+      html: [minifyHtml({empty: true})],
+      js: [uglify(), rev()]
+    }))
+    .pipe(gulp.dest('build/'));
+});
+
 // inject bower components
 gulp.task('wiredep', function () {
     var wiredep = require('wiredep').stream;
