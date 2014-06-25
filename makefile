@@ -52,7 +52,7 @@ app/scripts/${dataFile}.geo.json:
 # @source: http://catalogue.datalocale.fr/dataset/en_empac_p
 # @format: Zip
 .tmp/${dataFile}.shp.zip:
-	@printf "Fetching...\n\tEmplacements d'apport volontaire de la CUB data\n"
+	@printf "Fetching…\n\tEmplacements d'apport volontaire de la CUB data\n"
 	@curl --output $@ 'http://data.lacub.fr/files.php?gid=69&format=1'
 
 
@@ -63,10 +63,10 @@ app/scripts/${dataFile}.geo.json:
 
 # Install tooling and library
 install:
-	@printf "Installing system-wide (Ubuntu)...\n"
+	@printf "Installing system-wide (Ubuntu)…\n"
 	sudo apt-get -y install gdal-{bin,contrib}
 	sudo npm install -g topojson underscore gulp generator-gulp-webapp
-	@printf "Install project-wide (Ubuntu)...\n"
+	@printf "Install project-wide (Ubuntu)…\n"
 	npm install --save-dev topojson generator-leaflet underscore gulp
 	yo gulp-webapp
 	bower install --save polymaps topojson font-awesome d3 d3-plugins
