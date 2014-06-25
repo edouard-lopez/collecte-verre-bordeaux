@@ -21,7 +21,8 @@ dataFile=emplacements-pav
 
 
 .PHONY: default
-default: .tmp/${dataFile}.shp.zip \
+default: 	.tmp
+			.tmp/${dataFile}.shp.zip \
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}.shp
 
@@ -32,4 +33,10 @@ extract-emplacements: .tmp/${dataFile}.shp
 .tmp/${dataFile}.shp.zip:
 	@printf "Fetching...\n\tEmplacements d'apport volontaire de la CUB data\n"
 	@curl --output $@ http://data.lacub.fr/files.php?gid=69&format=1
+
+
+# Create .tmp/ directory if needed
+.tmp:
+	[[ ! -d .tmp ]] && mkdir .tmp
+
 
