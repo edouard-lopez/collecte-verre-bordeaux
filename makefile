@@ -24,8 +24,20 @@ default:		install
 			.tmp
 			.tmp/${dataFile}.shp.zip \
 			.tmp/${dataFile}.shp
+			app/scripts/${dataFile}.geo.json
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}.shp
+convert2geojson: app/scripts/${dataFile}.geo.json
+
+# Convert from Shapefile to TopoJSON
+# @alias: convert2geojson
+# @format: GEOJSON
+app/scripts/${dataFile}.geo.json:
+	@printf "Converting…\n\tShapefile → GeoJSON\n"
+	@ogr2ogr \
+		-f GeoJSON $@ \
+		.tmp/${dataFile}/*.shp
+
 
 # Extract Emplacements d'apport volontaire de la CUB
 # @alias: extract-emplacements
