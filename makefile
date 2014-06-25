@@ -25,9 +25,26 @@ default:		install
 			.tmp/${dataFile}.shp.zip \
 			.tmp/${dataFile} \
 			.tmp/${dataFile}.geo.json \
+			.tmp/${dataFile}.topo.json
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}
 convert2geojson: .tmp/${dataFile}.geo.json
+convert2topojson: .tmp/${dataFile}.topo.json
+
+# Convert from GeoJSON to TopoJSON
+# @alias: convert2topojson
+# @format: topoJSON
+.tmp/${dataFile}.topo.json:
+	@printf "Convert...\n\tGeoJSON → TopoJSON\n"
+	@topojson \
+		--id-property GID \
+		-p IDENT_X 	-p IDENT_Y
+		--quantization 1e4 \
+		--simplify-proportion 0.025 \
+		.tmp/${dataFile}.geo.json \
+	| underscore print > $@
+	ln -nf $@ app/scripts/
+
 
 # Convert from Shapefile to TopoJSON
 # @alias: convert2geojson
