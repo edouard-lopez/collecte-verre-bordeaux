@@ -19,13 +19,20 @@ SHELL := /bin/bash
 today=$(shell date '+%Y-%m-%d')
 dataFile=emplacements-pav
 
-
 .PHONY: default
 default:		install
 			.tmp
 			.tmp/${dataFile}.shp.zip \
+			.tmp/${dataFile}.shp
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}.shp
+
+# Extract Emplacements d'apport volontaire de la CUB
+# @alias: extract-emplacements
+# @format: Shapefile
+.tmp/${dataFile}.shp:
+	unzip .tmp/${dataFile}.shp.zip -d .tmp/${dataFile}
+
 
 # Download Emplacements d'apport volontaire de la CUB
 # @alias: get-emplacements
