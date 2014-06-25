@@ -21,7 +21,8 @@ dataFile=emplacements-pav
 
 
 .PHONY: default
-default: 	.tmp
+default:		install
+			.tmp
 			.tmp/${dataFile}.shp.zip \
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}.shp
@@ -40,3 +41,12 @@ extract-emplacements: .tmp/${dataFile}.shp
 	[[ ! -d .tmp ]] && mkdir .tmp
 
 
+# Install tooling and library
+install:
+	@printf "Installing system-wide (Ubuntu)...\n"
+	sudo apt-get -y install gdal-{bin,contrib}
+	sudo npm install -g topojson underscore gulp generator-gulp-webapp
+	@printf "Install project-wide (Ubuntu)...\n"
+	npm install --save-dev topojson generator-leaflet underscore gulp
+	yo gulp-webapp
+	bower install --save polymaps topojson font-awesome d3 d3-plugins
