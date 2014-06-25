@@ -2,7 +2,8 @@
   "name": "dataviz-cub-pav",
   "private": true,
   "dependencies": {
-    "jquery": "~1.11.0"
+    "jquery": "~1.11.0",
+    "polymaps": "~2.5.1"
   },
   "devDependencies": {}
 }
