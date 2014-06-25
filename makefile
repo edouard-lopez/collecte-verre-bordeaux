@@ -23,10 +23,10 @@ dataFile=emplacements-pav
 default:		install
 			.tmp
 			.tmp/${dataFile}.shp.zip \
-			.tmp/${dataFile}.shp
+			.tmp/${dataFile} \
 			app/scripts/${dataFile}.geo.json
 get-emplacements: .tmp/${dataFile}.shp.zip
-extract-emplacements: .tmp/${dataFile}.shp
+extract-emplacements: .tmp/${dataFile}
 convert2geojson: app/scripts/${dataFile}.geo.json
 
 # Convert from Shapefile to TopoJSON
@@ -42,8 +42,9 @@ app/scripts/${dataFile}.geo.json:
 # Extract Emplacements d'apport volontaire de la CUB
 # @alias: extract-emplacements
 # @format: Shapefile
-.tmp/${dataFile}.shp:
-	unzip .tmp/${dataFile}.shp.zip -d .tmp/${dataFile}
+.tmp/${dataFile}:
+	@printf "Extracting (overwrite)…\n"
+	unzip -o .tmp/${dataFile}.shp.zip -d .tmp/${dataFile}
 
 
 # Download Emplacements d'apport volontaire de la CUB
