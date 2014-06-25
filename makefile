@@ -33,7 +33,7 @@ extract-emplacements: .tmp/${dataFile}.shp
 # @format: Zip
 .tmp/${dataFile}.shp.zip:
 	@printf "Fetching...\n\tEmplacements d'apport volontaire de la CUB data\n"
-	@curl --output $@ http://data.lacub.fr/files.php?gid=69&format=1
+	@curl --output $@ 'http://data.lacub.fr/files.php?gid=69&format=1'
 
 
 # Create .tmp/ directory if needed
