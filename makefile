@@ -20,8 +20,7 @@ today=$(shell date '+%Y-%m-%d')
 dataFile=emplacements-pav
 
 .PHONY: default
-default:		install
-			.tmp
+default:		install clean .tmp \
 			.tmp/${dataFile}.shp.zip \
 			.tmp/${dataFile} \
 			.tmp/${dataFile}.geo.json \
@@ -79,6 +78,12 @@ convert2topojson: .tmp/${dataFile}.topo.json
 # Create .tmp/ directory if needed
 .tmp:
 	[[ ! -d .tmp ]] && mkdir .tmp
+
+
+clean:
+	@printf "Cleaning…\n\t.tmp/ directory\n"
+	@rm -rf .tmp
+	@rm -f app/scripts/emplacements*.json
 
 
 # Install tooling and library
