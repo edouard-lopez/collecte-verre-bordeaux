@@ -28,6 +28,7 @@ default:		install clean .tmp \
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}
 convert2geojson: .tmp/${dataFile}.geo.json
+convert2geojsonVanilla: .tmp/${dataFile}.vanilla.geo.json
 convert2topojson: .tmp/${dataFile}.topo.json
 
 # Convert from GeoJSON to TopoJSON
@@ -59,6 +60,14 @@ convert2topojson: .tmp/${dataFile}.topo.json
 		$@ .tmp/${dataFile}/*.shp
 	ln -nf $@ app/scripts/
 
+# Convert from Shapefile to geoJSON with all fields
+# @alias: convert2geojsonVanilla
+.tmp/${dataFile}.vanilla.geo.json:
+	ogr2ogr \
+		-f GeoJSON \
+		-t_srs EPSG:4326 \
+		-lco COORDINATE_PRECISION=6 \
+		$@ .tmp/${dataFile}/*.shp
 
 # Extract Emplacements d'apport volontaire de la CUB
 # @alias: extract-emplacements
