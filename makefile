@@ -37,7 +37,6 @@ convert2topojson: .tmp/${dataFile}.topo.json
 	@printf "Convert...\n\tGeoJSON → TopoJSON\n"
 	@topojson \
 		--id-property GID \
-		-p IDENT_X 	-p IDENT_Y
 		--quantization 1e4 \
 		--simplify-proportion 0.025 \
 		.tmp/${dataFile}.geo.json \
