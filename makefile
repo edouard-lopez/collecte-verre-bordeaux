@@ -67,7 +67,7 @@ convert2topojson: .tmp/${dataFile}.topo.json
 # @alias: get-emplacements
 # @source: http://catalogue.datalocale.fr/dataset/en_empac_p
 # @format: Zip
-# @projection: Lambert93
+# @projection: Lambert93 (EPSG:2154)
 .tmp/${dataFile}.shp.zip: .tmp
 	@printf "Fetching…\n\tEmplacements d'apport volontaire de la CUB data\n"
 	@curl --progress-bar --output $@ 'http://data.lacub.fr/files.php?layer=EN_EMPAC_P&ext=SHP_L93'
