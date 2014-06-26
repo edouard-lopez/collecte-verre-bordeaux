@@ -44,14 +44,19 @@ convert2topojson: .tmp/${dataFile}.topo.json
 	ln -nf $@ app/scripts/
 
 
-# Convert from Shapefile to TopoJSON
+# Convert from Shapefile to geoJSON keeping only interesting fields and changing projection:
+# 	* from: EPSG:2154 → Lambert-93
+# 	* to :	EPSG:4326 → WGS 84
 # @alias: convert2geojson
 # @format: geoJSON
 .tmp/${dataFile}.geo.json:
 	@printf "Converting…\n\tShapefile → GeoJSON\n"
-	@ogr2ogr \
-		-f GeoJSON $@ \
-		.tmp/${dataFile}/*.shp
+	ogr2ogr \
+		-f GeoJSON \
+		-t_srs EPSG:4326 \
+		-lco COORDINATE_PRECISION=6 \
+		-sql "SELECT CAST(GID as Integer), IDENT, MDATE FROM EN_EMPAC_P" \
+		$@ .tmp/${dataFile}/*.shp
 	ln -nf $@ app/scripts/
 
 
