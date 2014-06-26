@@ -61,7 +61,7 @@ convert2topojson: .tmp/${dataFile}.topo.json
 # @format: Shapefile
 .tmp/${dataFile}:
 	@printf "Extracting (overwrite)…\n"
-	unzip -o .tmp/${dataFile}.shp.zip -d .tmp/${dataFile}
+	@unzip -q -o .tmp/${dataFile}.shp.zip -d .tmp/${dataFile}
 
 
 # Download Emplacements d'apport volontaire de la CUB
@@ -71,13 +71,12 @@ convert2topojson: .tmp/${dataFile}.topo.json
 # @projection: Lambert93
 .tmp/${dataFile}.shp.zip: .tmp
 	@printf "Fetching…\n\tEmplacements d'apport volontaire de la CUB data\n"
-	# @curl --output $@ 'http://data.lacub.fr/files.php?gid=69&format=1'
-	@curl --output $@ 'http://data.lacub.fr/files.php?layer=EN_EMPAC_P&ext=SHP_L93'
+	@curl --progress-bar --output $@ 'http://data.lacub.fr/files.php?layer=EN_EMPAC_P&ext=SHP_L93'
 
 
 # Create .tmp/ directory if needed
 .tmp:
-	[[ ! -d .tmp ]] && mkdir .tmp
+	@[[ ! -d .tmp ]] && mkdir .tmp
 
 
 clean:
