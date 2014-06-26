@@ -1,6 +1,13 @@
-'use strict';
-
-var L, d3;
+/**
+* Display glass trash can on a map using data from http://www.datalocale.fr/dataset/en_empac_p
+* @param  {[type]} window    [description]
+* @param  {[type]} document  [description]
+* @param  {[type]} L         [description]
+* @param  {[type]} undefined [description]
+* @return {[type]}           [description]
+*/
+(function (window, document, L, d3) {
+	'use strict';
 
 var map = L.map('map', {
 	// crs: crs,
@@ -45,3 +52,5 @@ d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
 		}
 	).addTo(map);
 });
+}(window, document, L, d3));
+
