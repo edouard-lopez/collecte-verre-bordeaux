@@ -111,7 +111,7 @@ gulp.task('usemin', function() {
       html: [minifyHtml({empty: true})],
       js: [uglify(), rev()]
     }))
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('dist/'));
 });
 
 // inject bower components
