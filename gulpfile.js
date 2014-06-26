@@ -3,6 +3,9 @@
 
 var gulp = require('gulp');
 
+// @custom
+var port = 9082;
+
 // load plugins
 var $ = require('gulp-load-plugins')();
 
@@ -81,7 +84,7 @@ gulp.task('connect', function () {
         .use(connect.directory('app'));
 
     require('http').createServer(app)
-        .listen(9000)
+        .listen(port)
         .on('listening', function () {
             console.log('Started connect web server on http://localhost:9000');
         });
@@ -92,7 +95,7 @@ gulp.task('connect', function () {
 * 	* wiredep
 */
 gulp.task('serve', ['wiredep', 'connect'], function () {
-    require('opn')('http://localhost:9000');
+    require('opn')('http://localhost:'+port);
 });
 
 /*
