@@ -9,7 +9,10 @@
 (function (window, document, L, d3) {
 	'use strict';
 
-	// core settings
+	/**
+	 * Core map settings
+	 * @type {[type]}
+	 */
 	var map = L.map('map', {
 		center:  new L.LatLng(44.8442, -0.5933), // Bordeaux latitude/longitude
 		zoom: 14,
@@ -18,7 +21,10 @@
 		attribution: '© <a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La CUB</a>'
 	});
 
-	// Location of tiles (see next paragraph)
+	/**
+	 * Location of tiles (see next paragraph)
+	 * @type {Object}
+	 */
 	new L.tileLayer(
 		'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
 		{
@@ -27,6 +33,10 @@
 		}
 	).addTo(map);
 
+	/**
+	 * Define custom icon
+	 * @type {void}
+	 */
 	var glassTrash = L.icon({
 		iconUrl: 'images/broken-bottle.png',
 		shadowUrl: 'images/broken-bottle.shadow.png',
@@ -38,6 +48,11 @@
 		popupAnchor:  [0, -28] // point from which the popup should open relative to the iconAnchor
 	});
 
+	/**
+	 * Load data on the map
+	 * @param  {JSON} geojson data
+	 * @return {void}
+	 */
 	d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
 		L.geoJson(geojson,
 			{
