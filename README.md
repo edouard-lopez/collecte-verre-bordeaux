@@ -53,12 +53,12 @@ yo gulp-webapp
 ```
 Then install others dependencies:
 
-* I'm using [Polymaps for interactive map](http://polymaps.org/) ;
+* I'm using [LeafletJS for interactive map](http://leafletjs.com/) ;
 * and [`d3.js` for the dataviz](http://d3js.org/).
 
 ```bash
 npm install --save-dev topojson generator-gulp-webapp underscore gulp gulp-sass
-bower install --save polymaps topojson font-awesome d3 d3-plugins
+bower install --save topojson font-awesome d3 d3-plugins
 ```
 
 Finish by running `gulp` for building and gulp watch for preview :
