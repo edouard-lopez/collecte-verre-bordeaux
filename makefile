@@ -24,12 +24,38 @@ default:		install clean .tmp \
 			.tmp/${dataFile}.shp.zip \
 			.tmp/${dataFile} \
 			.tmp/${dataFile}.geo.json \
-			.tmp/${dataFile}.topo.json
+			.tmp/${dataFile}.topo.json \
+			.tmp/adresses.xml \
+			.tmp/adresses.xml \
+			app/scripts/adresses.json
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}
 convert2geojson: .tmp/${dataFile}.geo.json
 convert2geojsonVanilla: .tmp/${dataFile}.vanilla.geo.json
 convert2topojson: .tmp/${dataFile}.topo.json
+get-adresses: .tmp/adresses.xml
+adresses2json: app/scripts/adresses.json
+
+# Convert to JSON and reduce to {'id': 'street-name'} array
+# @alias: adresses2json
+# @format: JSON
+app/scripts/adresses.json:
+	@printf "Reducing as JSON…\n"
+	xml2json < .tmp/adresses.xml \
+		| jq '.markers | [.marker[] | {(.avancee): (.addresse)}]' \
+	 > $@
+
+
+# Fetch adress (street name) from http://ourecycler.fr/point-collecte/33800/Bordeaux
+# @alias: get-adresses
+# @format: XML
+.tmp/adresses.xml:
+	@printf "Fetching…\n\tAdresses\n"
+	@curl --progress-bar --output $@ \
+		-H 'Accept: text/html,application/xhtml+xml,application/xml' \
+		-H 'Referer: http://ourecycler.fr/' \
+		'http://ourecycler.fr/widget.php?SO_Lt=44.72203318071277&SO_Lg=-0.7824270703124512&NE_Lt=44.95331274222792&NE_Lg=-0.3759329296874512&typ=1&asso=-999&Pts-apport=1&mat=0&dech=1'
+
 
 # Convert from GeoJSON to TopoJSON
 # @alias: convert2topojson
@@ -96,6 +122,7 @@ clean:
 	@printf "Cleaning…\n\t.tmp/ directory\n"
 	@rm -rf .tmp
 	@rm -f app/scripts/emplacements*.json
+	@rm -f app/scripts/adresses*.json
 
 
 # Install tooling and library

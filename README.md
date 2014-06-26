@@ -4,6 +4,12 @@ Dataviz project to visualize different type of trash collecting point
 
 ![dataviz preview](./preview.png)
 
+## Data Sources
+
+* geo-location come from [official Gironde Open Data portal](http://www.datalocale.fr/dataset/en_empac_p) ;
+* adress from the [http://ourecycler.fr/point-collecte/33800/Bordeaux](Ourecycler.fr) website.
+
+
 # Install
 
 Start by cloning the project repository:
@@ -57,7 +63,7 @@ Then install others dependencies:
 * and [`d3.js` for the dataviz](http://d3js.org/).
 
 ```bash
-npm install --save-dev topojson generator-gulp-webapp underscore gulp gulp-sass
+npm install --save-dev jq xml2json-command topojson generator-gulp-webapp gulp gulp-sass
 bower install --save topojson font-awesome d3 d3-plugins
 ```
 
