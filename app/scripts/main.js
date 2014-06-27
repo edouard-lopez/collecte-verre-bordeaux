@@ -66,9 +66,10 @@
 					var id = adresses.indexOf(feature.properties.IDENT);
 					var label = id == -1 ? 'rue inconnue.' : adresses[id+1];
 					var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
+					var zoom = map.getZoom();
 
 					layer.bindPopup('<b>'+ label + '</b>'
-					                + '<br/>partager: <a href="#' + latLng + '">' + latLng + '</a>'
+					                + '<br/>partager: <a href="#c=' + latLng + '&z=' + zoom  + '">' + latLng + '</a>'
 					                + '<br/><small>#' + id + '</small>'
 		                )
 				    .on('click', function() {
