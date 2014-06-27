@@ -38,7 +38,11 @@ var paths = {
 var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', function () {
-    return gulp.src(paths.styles.dir+'/main.css')
+    return gulp.src('app/styles/main.scss')
+        .pipe($.rubySass({
+            style: 'expanded',
+            precision: 10
+        }))
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
@@ -156,9 +160,16 @@ gulp.task('usemin', function() {
 gulp.task('wiredep', function () {
     var wiredep = require('wiredep').stream;
 
+    gulp.src('app/styles/*.scss')
+        .pipe(wiredep({
+            directory: paths.appDir+'/bower_components'
+        }))
+        .pipe(gulp.dest('app/styles'));
+
     gulp.src(paths.appDir+'/*.html')
         .pipe(wiredep({
             directory: paths.appDir+'/bower_components'
+            exclude: ['bootstrap-sass-official']
         }))
         .pipe(gulp.dest('app'));
 });
@@ -177,7 +188,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
         server.changed(file.path);
     });
 
-    gulp.watch(paths.styles.dir+'/**/*.css', ['styles']);
+    gulp.watch(paths.styles.dir+'/**/*.scss', ['styles']);
     gulp.watch(paths.scripts.dir+'/**/*.js', ['scripts']);
     gulp.watch(paths.images.dir+'/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);
