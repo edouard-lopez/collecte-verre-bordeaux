@@ -16,7 +16,7 @@
 	 * @type {[type]}
 	 */
 	var map = L.map('map', {
-		center:  new L.LatLng(44.8442, -0.5933), // Bordeaux latitude/longitude
+		center:  setCenter(), // Bordeaux latitude/longitude
 		zoom: 14,
 		minZoom: 0,
 		maxZoom: 18,
@@ -93,6 +93,22 @@
 		});
 	}
 
+	function setCenter() {
+		var center = new L.LatLng(44.8442, -0.5933);
+		var re = /^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
+		var hash = window.location.hash.replace('#', '');
+		var latLng = re.exec(hash);
+		console.log(latLng);
+
+		if (latLng !== null) {
+			var lat = latLng[1];
+			var lng = latLng[3]
+			if (latLng.length === 3) { lat = latLng[1]; lng = latLng[2] }
+			center = new L.LatLng(lat, lng);
+		};
+
+		return center;
+	}
 	getAdress().then(addItemToMap);
 
 }(window, document, L, d3));
