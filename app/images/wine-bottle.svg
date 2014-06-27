@@ -12,7 +12,7 @@
    id="svg10"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   width="154.71591"
+   width="250.00851"
    height="416.01904"
    sodipodi:docname="wine-bottle.svg"
    inkscape:export-filename="/home/ed8/projects/dataviz-cub-pav/app/images/broken-bottle.png"
@@ -31,34 +31,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs14">
-    <filter
-       inkscape:collect="always"
-       id="filter816"
-       x="-0.07314425"
-       width="1.1462885"
-       y="-0.33388403"
-       height="1.667768"
-       color-interpolation-filters="sRGB">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="5.6729586"
-         id="feGaussianBlur818" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       id="filter3886"
-       x="-0.11416885"
-       width="1.2283376"
-       y="-0.040692791"
-       height="1.0813856"
-       color-interpolation-filters="sRGB">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="6.8841869"
-         id="feGaussianBlur3888" />
-    </filter>
-  </defs>
+     id="defs14" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -68,71 +41,76 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1918"
+     inkscape:window-width="959"
      inkscape:window-height="1055"
      id="namedview12"
      showgrid="false"
      inkscape:zoom="1.083693"
-     inkscape:cx="-137.26125"
-     inkscape:cy="271.97362"
+     inkscape:cx="34.47928"
+     inkscape:cy="271.97364"
      inkscape:window-x="1366"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg10"
      inkscape:snap-nodes="true"
      fit-margin-top="5"
-     fit-margin-left="5"
-     fit-margin-right="5"
+     fit-margin-left="75"
+     fit-margin-right="75"
      fit-margin-bottom="5" />
-  <path
-     inkscape:connector-curvature="0"
-     id="rect20"
-     d="m 97.343748,258.34375 -48.15625,34 -23.406248,-23.21875 0,116.15625 100,0 0,-110.5 c -5.59313,-3.38908 -14.34769,-8.30275 -28.437502,-16.4375 z"
-     style="fill:#000000;stroke:none" />
-  <rect
-     style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-     id="rect22"
-     width="100"
-     height="41.299168"
-     x="25.772728"
-     y="369.71988"
-     ry="10"
-     rx="20" />
   <g
-     id="g3907"
-     transform="translate(-72.727272,-13.235994)">
+     id="g2996"
+     style="fill:#2d5016">
     <path
-       inkscape:connector-curvature="0"
-       style="fill:#000000;stroke:none"
-       d="m 98.508522,163.57974 0,87.34375 23.406248,19.5625 48.15625,-52 c 15.29244,26.48728 23.83859,37.15945 28.4375,45.125 l 0,-100.03125 z"
-       id="path3905" />
-    <path
-       transform="matrix(1.0358025,0,0,1,3.4999938,-1.0727056)"
-       d="m 188.25983,163.85577 c 0,17.92128 -21.61199,32.44935 -48.27175,32.44935 -26.65975,0 -48.271749,-14.52807 -48.271749,-32.44935 0,-17.92127 21.611999,-32.44934 48.271749,-32.44934 26.65976,0 48.27175,14.52807 48.27175,32.44934 z"
-       sodipodi:ry="32.449345"
-       sodipodi:rx="48.271751"
-       sodipodi:cy="163.85577"
-       sodipodi:cx="139.98808"
-       id="path24"
-       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       sodipodi:type="arc" />
+       style="fill:#2d5016;stroke:none"
+       d="m 146.57102,258.34375 -48.15625,34 -23.40625,-23.21875 0,116.15625 100,0 0,-110.5 c -5.59313,-3.38908 -14.34769,-8.30275 -28.4375,-16.4375 z"
+       id="rect20"
+       inkscape:connector-curvature="0" />
     <rect
-       ry="5"
-       rx="10"
-       y="18.235994"
-       x="129.45947"
-       height="127.65197"
-       width="38.081047"
-       id="rect26"
-       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
-    <rect
-       ry="5.0000005"
-       rx="5"
-       y="26.61371"
-       x="127.70146"
-       height="23.283083"
-       width="41.597069"
-       id="rect28"
-       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+       rx="20"
+       ry="10"
+       y="369.71988"
+       x="75"
+       height="41.299168"
+       width="100"
+       id="rect22"
+       style="fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <g
+       style="fill:#2d5016"
+       transform="translate(-23.499999,-13.235994)"
+       id="g3907">
+      <path
+         id="path3905"
+         d="m 98.508522,163.57974 0,87.34375 23.406248,19.5625 48.15625,-52 c 15.29244,26.48728 23.83859,37.15945 28.4375,45.125 l 0,-100.03125 z"
+         style="fill:#2d5016;stroke:none"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path24"
+         sodipodi:cx="139.98808"
+         sodipodi:cy="163.85577"
+         sodipodi:rx="48.271751"
+         sodipodi:ry="32.449345"
+         d="m 188.25983,163.85577 c 0,17.92128 -21.61199,32.44935 -48.27175,32.44935 -26.65975,0 -48.271749,-14.52807 -48.271749,-32.44935 0,-17.92127 21.611999,-32.44934 48.271749,-32.44934 26.65976,0 48.27175,14.52807 48.27175,32.44934 z"
+         transform="matrix(1.0358025,0,0,1,3.4999938,-1.0727056)" />
+      <rect
+         style="fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect26"
+         width="38.081047"
+         height="127.65197"
+         x="129.45947"
+         y="18.235994"
+         rx="10"
+         ry="5" />
+      <rect
+         style="fill:#2d5016;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect28"
+         width="41.597069"
+         height="23.283083"
+         x="127.70146"
+         y="26.61371"
+         rx="5"
+         ry="5.0000005" />
+    </g>
   </g>
 </svg>
