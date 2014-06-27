@@ -4,7 +4,11 @@
 var gulp = require('gulp');
 
 // @custom
-var port = 9082;
+var project = {
+	name: 'dataviz-cub-pav',
+	port: 9082,
+	livereloadPort: 56438
+};
 var paths = {
     appDir: 'app',
     buildDir: 'dist',
@@ -102,15 +106,15 @@ gulp.task('default', ['clean'], function () {
 gulp.task('connect', function () {
     var connect = require('connect');
     var app = connect()
-        .use(require('connect-livereload')({ port: 35729 }))
+        .use(require('connect-livereload')({ port: project.livereloadPort }))
         .use(connect.static('app'))
         .use(connect.static('.tmp'))
         .use(connect.directory('app'));
 
     require('http').createServer(app)
-        .listen(port)
+        .listen(project.port)
         .on('listening', function () {
-            console.log('Started connect web server on http://localhost:9000');
+            console.log('Started connect web server on http://localhost:'+project.port);
         });
 });
 
@@ -119,7 +123,7 @@ gulp.task('connect', function () {
 * 	* wiredep
 */
 gulp.task('serve', ['wiredep', 'connect'], function () {
-    require('opn')('http://localhost:'+port);
+    require('opn')('http://localhost:'+project.port);
 });
 
 /*
@@ -153,7 +157,7 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('watch', ['connect', 'serve'], function () {
-    var server = $.livereload();
+    var server = $.livereload(project.livereloadPort);
 
     // watch for changes
 
