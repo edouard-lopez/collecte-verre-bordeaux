@@ -1,3 +1,6 @@
+'use strict';
+var L, d3, sprintf;
+
 /**
 * Display glass trash can on a map using data from http://www.datalocale.fr/dataset/en_empac_p
 * @param  {[type]} window    [description]
@@ -29,7 +32,7 @@ var pavMap = { // pav = point d'apport volontaire
 		var center = this.DEFAULT.mapCenter; // when no value
 
 		var reCenter = /c=(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
-		var reZoom = /z=(\d{,2})/
+		var reZoom = /z=(\d{,2})/;
 
 		var hash = window.location.hash.replace('#', '').split('&');
 		var _center = reCenter.exec(hash[0]);
@@ -37,10 +40,10 @@ var pavMap = { // pav = point d'apport volontaire
 
 		if (_center !== null) {
 			var lat = _center[1];
-			var lng = _center[3]
-			if (_center.length === 3) { lat = _center[1]; lng = _center[2] }
+			var lng = _center[3];
+			if (_center.length === 3) { lat = _center[1]; lng = _center[2]; }
 			center = new L.LatLng(lat, lng);
-		};
+		}
 
 		this.map.setView(center, zoom);
 
@@ -54,7 +57,7 @@ var pavMap = { // pav = point d'apport volontaire
 	getAdress: function () {
 		var pav = this; // needed when in d3 context
 
-		return new Promise(function (resolve, reject) {
+		return new Promise(function (resolve) {
 			d3.json('scripts/adresses.json', function (adr) {
 				pav.adresses = adr;
 				resolve(pav);
@@ -78,28 +81,29 @@ var pavMap = { // pav = point d'apport volontaire
 					},
 					onEachFeature: function (feature, layer) {
 						var id = pav.adresses.indexOf(feature.properties.IDENT);
-						var label = id == -1 ? 'rue inconnue.' : pav.adresses[id+1];
+						var label = id === -1 ? 'rue inconnue.' : pav.adresses[id+1];
 						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
 						var zoom = pav.map.getZoom();
 
 						var html = sprintf(
-								'<dl class="dl-horizontal">'
-							+	'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>'
-							+	'	<dd>%s</dd>'
-							+	'	<dt class="text-muted"><i class="fa fa-share-alt fa-lg"></i>&nbsp;:</dt>'
-							+	'	<dd><a href="#c=%s&z=%d" target="_blank">%s</a></dd>'
-							+	'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>'
-							+	'	<dd><small>%s</small></dd>'
-							+	'	<dd><small>%s</small></dd>'
-							+	'</dl>',
+							'<dl class="dl-horizontal">' +
+							'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>' +
+							'	<dd>%s</dd>' +
+							'	<dt class="text-muted"><i class="fa fa-share-alt fa-lg"></i>&nbsp;:</dt>' +
+							'	<dd><a href="#c=%s&z=%d" target="_blank">%s</a></dd>' +
+							'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>' +
+							'	<dd><small>%s</small></dd>' +
+							'	<dd><small>%s</small></dd>' +
+							'</dl>',
 							label, latLng, zoom++, latLng, id, this._leaflet_id
 						);
 						layer.bindPopup(html, {className: 'code'+id })
-					    .on('click', function() {
-					    		console.info(this._leaflet_id);
-				    			console.log(latLng);
-				    		}
-				      )}
+						.on('click', function() {
+								console.info(this._leaflet_id);
+								console.log(latLng);
+							}
+						);
+					 }
 				}
 			).addTo(pav.map);
 		});
@@ -161,9 +165,7 @@ var pavMap = { // pav = point d'apport volontaire
 
 };
 
-(function (window, document, map, L, d3) {
-	'use strict';
-
+(function (window, document, map) {
 	map.init()
 		.addLayerToMap()
 		.customizeMarker()
@@ -173,5 +175,4 @@ var pavMap = { // pav = point d'apport volontaire
 			app.addItemToMap();
 		});
 
-}(window, document, pavMap, L, d3));
-
+}(window, document, pavMap));
