@@ -54,7 +54,7 @@ app/scripts/adresses.json:
 	@curl --progress-bar --output $@ \
 		-H 'Accept: text/html,application/xhtml+xml,application/xml' \
 		-H 'Referer: http://ourecycler.fr/' \
-		'http://ourecycler.fr/widget.php?SO_Lt=44.72203318071277&SO_Lg=-0.7824270703124512&NE_Lt=44.95331274222792&NE_Lg=-0.3759329296874512&typ=1&asso=-999&Pts-apport=1&mat=0&dech=1'
+		'http://ourecycler.fr/generateur.php?SO_Lt=44.72813137800844&SO_Lg=-0.7978765942382324&NE_Lt=44.94723833119456&NE_Lg=-0.36048340576166993&typ=1&dech=1'
 
 
 # Convert from GeoJSON to TopoJSON
