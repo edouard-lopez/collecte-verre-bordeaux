@@ -168,7 +168,7 @@ gulp.task('wiredep', function () {
 
     gulp.src(paths.appDir+'/*.html')
         .pipe(wiredep({
-            directory: paths.appDir+'/bower_components'
+            directory: paths.appDir+'/bower_components',
             exclude: ['bootstrap-sass-official']
         }))
         .pipe(gulp.dest('app'));
