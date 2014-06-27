@@ -6,111 +6,172 @@
 * @param  {[type]} undefined [description]
 * @return {[type]}           [description]
 */
-(function (window, document, L, d3) {
-	'use strict';
 
-	var adresses = {};
+var pavMap = { // pav = point d'apport volontaire
+	map: null,
 
-	/**
-	 * Core map settings
-	 * @type {[type]}
-	 */
-	var map = L.map('map', {
-		center:  setCenter(), // Bordeaux latitude/longitude
-		zoom: 14,
-		minZoom: 0,
-		maxZoom: 18,
-		attribution: '© <a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La CUB</a>'
-	});
+	DEFAULT: {
+		mapCenter: new L.LatLng(44.8442, -0.5933),
+		mapZoom: 14
+	},
 
-	/**
-	 * Location of tiles (see next paragraph)
-	 * @type {Object}
-	 */
-	new L.tileLayer(
-		'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
-		{
-			id: 'edouard-lopez.ik52o4kd',
-			continuousWorld: true,  // very important
-		}
-	).addTo(map);
+	// custom map marker (e.g. broken bottle)
+	marker: null,
+	markerList: [],
+
+	//
+	adresses: null,
 
 	/**
-	 * Define custom icon
-	 * @type {void}
+	 * Set or restore map state
 	 */
-	var glassTrash = L.icon({
-		iconUrl: 'images/broken-bottle.png',
-		shadowUrl: 'images/broken-bottle.shadow.png',
+	setMapState: function () {
+		var center = this.DEFAULT.mapCenter; // when no value
 
-		iconSize:     [19, 32], // size of the icon
-		shadowSize:   [29, 32], // size of the shadow
-		iconAnchor:   [9.5, 32], // point of the icon which will correspond to marker's location
-		// shadowAnchor: [4, 62],  // the same for the shadow
-		popupAnchor:  [0, -28] // point from which the popup should open relative to the iconAnchor
-	});
+		var reCenter = /c=(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
+		var reZoom = /z=(\d{,2})/
 
-	/**
-	 * Load data on the map
-	 * @param  {JSON} geojson data
-	 * @return {void}
-	 */
-	function addItemToMap() {
-	d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
-		L.geoJson(geojson,
-			{
-				pointToLayer: function (feature, latLng) {
-					return L.marker(latLng, {icon: glassTrash});
-				},
-				onEachFeature: function (feature, layer) {
-					var id = adresses.indexOf(feature.properties.IDENT);
-					var label = id == -1 ? 'rue inconnue.' : adresses[id+1];
-					var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
-					var zoom = map.getZoom();
+		var hash = window.location.hash.replace('#', '').split('&');
+		var _center = reCenter.exec(hash[0]);
+		var zoom = reZoom.exec(hash[1]) || this.DEFAULT.mapZoom ;
 
-					layer.bindPopup('<b>'+ label + '</b>'
-					                + '<br/>partager: <a href="#c=' + latLng + '&z=' + zoom  + '">' + latLng + '</a>'
-					                + '<br/><small>#' + id + '</small>'
-		                )
-				    .on('click', function() {
-			    			console.log(latLng);
-			    		}
-			      )}
-			}
-		).addTo(map);
-	});
-	}
-
-	/**
-	 * Get adresses JSON file to map with data points in addItemToMap()
-	 * @return {void} [description]
-	 */
-	function getAdress() {
-		return new Promise(function (resolve, reject) {
-		d3.json('scripts/adresses.json', function (adr) {
-			adresses = adr;
-			resolve();
-		});
-		});
-	}
-
-	function setCenter() {
-		var center = new L.LatLng(44.8442, -0.5933);
-		var re = /^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
-		var hash = window.location.hash.replace('#', '');
-		var latLng = re.exec(hash);
-		console.log(latLng);
-
-		if (latLng !== null) {
-			var lat = latLng[1];
-			var lng = latLng[3]
-			if (latLng.length === 3) { lat = latLng[1]; lng = latLng[2] }
+		if (_center !== null) {
+			var lat = _center[1];
+			var lng = _center[3]
+			if (_center.length === 3) { lat = _center[1]; lng = _center[2] }
 			center = new L.LatLng(lat, lng);
 		};
 
-		return center;
-	}
-	getAdress().then(addItemToMap);
+		this.map.setView(center, zoom);
 
-}(window, document, L, d3));
+		return this;
+	},
+
+	/**
+	* Get adresses JSON file to map with data points in addItemToMap()
+	* @return {pavMap} [description]
+	*/
+	getAdress: function () {
+		var pav = this; // needed when in d3 context
+
+		return new Promise(function (resolve, reject) {
+			d3.json('scripts/adresses.json', function (adr) {
+				pav.adresses = adr;
+				resolve(pav);
+			});
+		});
+	},
+
+	/**
+	* Load data on the map
+	* @param  {JSON} geojson data
+	* @return {pavMap}
+	*/
+	addItemToMap: function () {
+		var pav = this; // needed when in d3 context
+
+		d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
+			L.geoJson(geojson,
+				{
+					pointToLayer: function (feature, latLng) {
+						return L.marker(latLng, {icon: pav.marker});
+					},
+					onEachFeature: function (feature, layer) {
+						var id = pav.adresses.indexOf(feature.properties.IDENT);
+						var label = id == -1 ? 'rue inconnue.' : pav.adresses[id+1];
+						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
+						var zoom = pav.map.getZoom();
+
+						var html = sprintf(
+								'<dl class="dl-horizontal">'
+							+	'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>'
+							+	'	<dd>%s</dd>'
+							+	'	<dt class="text-muted"><i class="fa fa-share-alt fa-lg"></i>&nbsp;:</dt>'
+							+	'	<dd><a href="#c=%s&z=%d" target="_blank">%s</a></dd>'
+							+	'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>'
+							+	'	<dd><small>%s</small></dd>'
+							+	'	<dd><small>%s</small></dd>'
+							+	'</dl>',
+							label, latLng, zoom++, latLng, id, this._leaflet_id
+						);
+						layer.bindPopup(html, {className: 'code'+id })
+					    .on('click', function() {
+					    		console.info(this._leaflet_id);
+				    			console.log(latLng);
+				    		}
+				      )}
+				}
+			).addTo(pav.map);
+		});
+
+		return this;
+	},
+
+	/**
+	* Define custom icon
+	* @type {pavMap}
+	*/
+	customizeMarker: function () {
+		this.marker = L.icon({
+			iconUrl: 'images/broken-bottle.png',
+			shadowUrl: 'images/broken-bottle.shadow.png',
+
+			iconSize:     [19, 32], // size of the icon
+			shadowSize:   [29, 32], // size of the shadow
+			iconAnchor:   [9.5, 32], // point of the icon which will correspond to marker's location
+			// shadowAnchor: [4, 62],  // the same for the shadow
+			popupAnchor:  [0, -28] // point from which the popup should open relative to the iconAnchor
+		});
+
+		return this;
+	},
+
+	/**
+	* Location of tiles (see next paragraph)
+	* @type {Object}
+	*/
+	addLayerToMap: function () {
+		new L.tileLayer(
+			'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
+			{
+				id: 'edouard-lopez.ik52o4kd',
+				continuousWorld: true,  // very important
+			}
+		).addTo(this.map);
+
+		return this;
+	},
+
+	/**
+	 * Initialization of core map settings
+	 * @type {pavMap}
+	 */
+	init: function () {
+		this.map = L.map('map', {
+			center:  this.DEFAULT.center, // Bordeaux latitude/longitude
+			zoom: this.DEFAULT.zoom,
+			minZoom: 0,
+			maxZoom: 18,
+			attribution: '© <a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La CUB</a>'
+		});
+		// this.customizeMarker();
+
+		return this;
+	}
+
+};
+
+(function (window, document, map, L, d3) {
+	'use strict';
+
+	map.init()
+		.addLayerToMap()
+		.customizeMarker()
+		.setMapState()
+		.getAdress()
+		.then(function(app) {
+			app.addItemToMap();
+		});
+
+}(window, document, pavMap, L, d3));
 
