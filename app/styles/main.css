@@ -1,9 +1,0 @@
-.map-app {
-	min-width: 40%;
-}
-.map-app .map {
-	min-width: 100%;
-	min-height: 600px;
-}
-
-#map { height: 180px; }
