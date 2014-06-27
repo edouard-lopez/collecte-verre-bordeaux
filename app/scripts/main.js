@@ -59,8 +59,8 @@
 	d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
 		L.geoJson(geojson,
 			{
-				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon: glassTrash});
+				pointToLayer: function (feature, latLng) {
+					return L.marker(latLng, {icon: glassTrash});
 				},
 				onEachFeature: function (feature, layer) {
 					var id = adresses.indexOf(feature.properties.IDENT);
