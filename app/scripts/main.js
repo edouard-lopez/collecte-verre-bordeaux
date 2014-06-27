@@ -9,6 +9,8 @@
 (function (window, document, L, d3) {
 	'use strict';
 
+	var adresses = {};
+
 	/**
 	 * Core map settings
 	 * @type {[type]}
@@ -53,6 +55,7 @@
 	 * @param  {JSON} geojson data
 	 * @return {void}
 	 */
+	function addItemToMap() {
 	d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
 		L.geoJson(geojson,
 			{
@@ -60,10 +63,37 @@
 					return L.marker(latlng, {icon: glassTrash});
 				},
 				onEachFeature: function (feature, layer) {
-					layer.bindPopup(feature.properties.IDENT);
-				}
+					var id = adresses.indexOf(feature.properties.IDENT);
+					var label = id == -1 ? 'rue inconnue.' : adresses[id+1];
+					var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
+
+					layer.bindPopup('<b>'+ label + '</b>'
+					                + '<br/>partager: <a href="#' + latLng + '">' + latLng + '</a>'
+					                + '<br/><small>#' + id + '</small>'
+		                )
+				    .on('click', function() {
+			    			console.log(latLng);
+			    		}
+			      )}
 			}
 		).addTo(map);
 	});
+	}
+
+	/**
+	 * Get adresses JSON file to map with data points in addItemToMap()
+	 * @return {void} [description]
+	 */
+	function getAdress() {
+		return new Promise(function (resolve, reject) {
+		d3.json('scripts/adresses.json', function (adr) {
+			adresses = adr;
+			resolve();
+		});
+		});
+	}
+
+	getAdress().then(addItemToMap);
+
 }(window, document, L, d3));
 

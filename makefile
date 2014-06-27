@@ -42,7 +42,7 @@ adresses2json: app/scripts/adresses.json
 app/scripts/adresses.json:
 	@printf "Reducing as JSON…\n"
 	xml2json < .tmp/adresses.xml \
-		| jq '.markers | [.marker[] | {(.avancee): (.addresse)}]' \
+		| jq '.markers | [.marker[] | (.avancee), (.addresse)]' \
 	 > $@
 
 
