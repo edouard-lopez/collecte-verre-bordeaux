@@ -1,7 +1,9 @@
 {
   "name": "dataviz-cub-pav",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-util": "^2.2.18"
+  },
   "devDependencies": {
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",
@@ -26,6 +28,7 @@
     "gulp-useref": "^0.4.2",
     "jshint-stylish": "^0.2.0",
     "opn": "^0.1.1",
+    "rsyncwrapper": "^0.4.0",
     "wiredep": "^1.4.3"
   },
   "engines": {
