@@ -31,12 +31,12 @@ var pavMap = { // pav = point d'apport volontaire
 	setMapState: function () {
 		var center = this.DEFAULT.mapCenter; // when no value
 
-		var reCenter = /c=(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/;
-		var reZoom = /z=(\d{,2})/;
+		var reCenter = /c=(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)/;
+		var reZoom = /z=(\d{1,2})/;
 
-		var hash = window.location.hash.replace('#', '').split('&');
-		var _center = reCenter.exec(hash[0]);
-		var zoom = reZoom.exec(hash[1]) || this.DEFAULT.mapZoom ;
+		var hash = window.location.hash;
+		var _center = reCenter.exec(hash);
+		var zoom = reZoom.exec(hash)[1] || this.DEFAULT.mapZoom ;
 
 		if (_center !== null) {
 			var lat = _center[1];
