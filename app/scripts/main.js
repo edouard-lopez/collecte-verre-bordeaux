@@ -122,8 +122,8 @@ var pavMap = { // pav = point d'apport volontaire
 
 			iconSize:     [19, 32], // size of the icon
 			shadowSize:   [29, 32], // size of the shadow
-			iconAnchor:   [9.5, 32], // point of the icon which will correspond to marker's location
-			// shadowAnchor: [4, 62],  // the same for the shadow
+			iconAnchor:   [8.5, 32], // point of the icon which will correspond to marker's location
+			shadowAnchor: [6, 32],  // the same for the shadow
 			popupAnchor:  [0, -28] // point from which the popup should open relative to the iconAnchor
 		});
 
