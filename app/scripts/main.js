@@ -60,10 +60,15 @@ var pavMap = { // pav = point d'apport volontaire
 	getAdress: function () {
 		var pav = this; // needed when in d3 context
 
-		return new Promise(function (resolve) {
+		return new Promise(function (resolve, reject) {
 			d3.json('scripts/adresses.json', function (adr) {
 				pav.adresses = adr;
-				resolve(pav);
+
+				if (pav.adresses !== null) {
+					resolve(pav);
+				} else {
+					reject(Error(adr));
+				}
 			});
 		});
 	},
@@ -76,6 +81,7 @@ var pavMap = { // pav = point d'apport volontaire
 	addItemToMap: function () {
 		var pav = this; // needed when in d3 context
 
+		return new Promise(function (resolve, reject) {
 		d3.json('scripts/emplacements-pav.geo.json', function (geojson) {
 			L.geoJson(geojson,
 				{
@@ -111,12 +117,18 @@ var pavMap = { // pav = point d'apport volontaire
 								console.log(latLng);
 							}
 						);
+						pav.markerList[id] = layer;
 					 }
 				}
 			).addTo(pav.map);
-		});
 
-		return this;
+			if (Object.keys(pav.markerList).length > 0) {
+				resolve(pav);
+			} else {
+				reject(Error(geojson));
+			}
+		});
+		});
 	},
 
 	/**
@@ -183,7 +195,8 @@ var pavMap = { // pav = point d'apport volontaire
 		.setMapState()
 		.getAdress()
 		.then(function(app) {
-			app.addItemToMap();
+			app.addItemToMap().then(function (app) {
+				app.highlightMarker() });
 		});
 
 }(window, document, pavMap));
