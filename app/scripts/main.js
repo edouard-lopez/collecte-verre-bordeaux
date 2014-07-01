@@ -26,6 +26,24 @@ var pavMap = { // pav = point d'apport volontaire
 	adresses: null,
 
 	/**
+	 * Hightlight marker given in the URL fragment attribut 'pav'
+	 * @return {void}
+	 */
+	highlightMarker: function () {
+		var rePav = /pav=([\d\w]+)/;
+
+		var hash = window.location.hash;
+		if (hash !== "" && hash !== null) {
+			var pid = rePav.exec(hash)[1];
+			var selector = sprintf('[alt="%s"]', pid);
+
+			console.info(pid, this.markerList)
+			$(selector).attr('src', 'images/icon.active.png');
+			this.markerList[pid].openPopup();
+		}
+	},
+
+	/**
 	 * Set or restore map state
 	 */
 	setMapState: function () {
