@@ -103,7 +103,7 @@ var pavMap = { // pav = point d'apport volontaire
 							'	<dd><small>%s</small></dd>' +
 							// '	<dd><small>%s</small></dd>' +
 							'</dl>',
-							label, latLng, id, ++zoom, latLng, id
+							label, latLng, id, zoom, latLng, id
 						);
 						layer.options.alt = id; // add attribute to <img>, used for URL reference
 						layer.bindPopup(html, {className: 'code'+id })
