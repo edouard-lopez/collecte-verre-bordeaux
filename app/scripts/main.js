@@ -30,21 +30,24 @@ var pavMap = { // pav = point d'apport volontaire
 	 */
 	setMapState: function () {
 		var center = this.DEFAULT.mapCenter; // when no value
+		var zoom = this.DEFAULT.mapZoom ;
 
 		var reCenter = /c=(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)/;
 		var reZoom = /z=(\d{1,2})/;
 
 		var hash = window.location.hash;
-		var _center = reCenter.exec(hash);
-		var zoom = reZoom.exec(hash)[1] || this.DEFAULT.mapZoom ;
+		if (hash !== "" && hash !== null) {
+			var _center = reCenter.exec(hash);
+			var zoom = reZoom.exec(hash)[1] || this.DEFAULT.mapZoom ;
 
-		if (_center !== null) {
-			var lat = _center[1];
-			var lng = _center[3];
-			if (_center.length === 3) { lat = _center[1]; lng = _center[2]; }
-			center = new L.LatLng(lat, lng);
+			if (_center !== null) {
+				var lat = _center[1];
+				var lng = _center[3];
+				if (_center.length === 3) { lat = _center[1]; lng = _center[2]; }
+				center = new L.LatLng(lat, lng);
+			}
+
 		}
-
 		this.map.setView(center, zoom);
 
 		return this;
