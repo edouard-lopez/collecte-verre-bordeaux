@@ -20,7 +20,7 @@ var pavMap = { // pav = point d'apport volontaire
 
 	// custom map marker (e.g. broken bottle)
 	marker: null,
-	markerList: [],
+	markerList: {},
 
 	//
 	adresses: null,
