@@ -80,7 +80,12 @@ var pavMap = { // pav = point d'apport volontaire
 			L.geoJson(geojson,
 				{
 					pointToLayer: function (feature, latLng) {
-						return L.marker(latLng, {icon: pav.marker});
+						return L.marker(latLng,
+							{
+								icon: pav.marker,
+								alt: '<placeholder>',
+							}
+			                	);
 					},
 					onEachFeature: function (feature, layer) {
 						var id = feature.properties.IDENT;
@@ -92,17 +97,17 @@ var pavMap = { // pav = point d'apport volontaire
 							'<dl class="dl-horizontal">' +
 							'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>' +
 							'	<dd>%s</dd>' +
-							'	<dt class="text-muted"><i class="fa fa-share-alt fa-lg"></i>&nbsp;:</dt>' +
-							'	<dd><a href="#c=%s&z=%d" target="_blank">%s</a></dd>' +
+							'	<dt class="text-muted"><abbr title="Ouvrir dans un nouvel onglet">coord.</abbr>:</dt>' +
+							'	<dd><a href="#c=%s&pav=%s&z=%d" target="_blank">%s <i class="fa fa-external-link"></i></a></dd>' +
 							'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>' +
 							'	<dd><small>%s</small></dd>' +
-							'	<dd><small>%s</small></dd>' +
+							// '	<dd><small>%s</small></dd>' +
 							'</dl>',
-							label, latLng, zoom++, latLng, id, this._leaflet_id
+							label, latLng, id, ++zoom, latLng, id
 						);
+						layer.options.alt = id; // add attribute to <img>, used for URL reference
 						layer.bindPopup(html, {className: 'code'+id })
 						.on('click', function() {
-								console.info(this._leaflet_id);
 								console.log(latLng);
 							}
 						);
