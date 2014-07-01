@@ -80,8 +80,8 @@ var pavMap = { // pav = point d'apport volontaire
 						return L.marker(latLng, {icon: pav.marker});
 					},
 					onEachFeature: function (feature, layer) {
-						var id = pav.adresses.indexOf(feature.properties.IDENT);
-						var label = id === -1 ? 'rue inconnue.' : pav.adresses[id+1];
+						var id = feature.properties.IDENT;
+						var label = id in pav.adresses ? pav.adresses[id] :  'rue inconnue.';
 						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
 						var zoom = pav.map.getZoom();
 

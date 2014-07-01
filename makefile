@@ -37,12 +37,13 @@ get-adresses: .tmp/adresses.xml
 adresses2json: app/scripts/adresses.json
 
 # Convert to JSON and reduce to {'id': 'street-name'} array
+# @warning: current 'jq' command doesn't support duplicate key!
 # @alias: adresses2json
 # @format: JSON
 app/scripts/adresses.json:
 	@printf "Reducing as JSON…\n"
 	xml2json < .tmp/adresses.xml \
-		| jq '.markers | [.marker[] | (.avancee), (.addresse)]' \
+		| jq 'reduce .markers.marker[] as $$item ({}; . + {"\($$item.avancee)":$$item.addresse})' \
 	 > $@
 
 
