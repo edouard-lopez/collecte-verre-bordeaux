@@ -11,18 +11,41 @@ var L, d3, sprintf;
 */
 
 var pavMap = { // pav = point d'apport volontaire
+
+	/**
+	 * The leaftlet map object.
+	 * @link: http://leafletjs.com/reference.html#map-class
+	 * @type {[type]}
+	 */
 	map: null,
 
+	/**
+	 * DEFAULT parameters
+	 * @type {Object}
+	 */
 	DEFAULT: {
 		mapCenter: new L.LatLng(44.8442, -0.5933),
 		mapZoom: 14
 	},
 
-	// custom map marker (e.g. broken bottle)
+	/**
+	 * Marker object used by leaftlet (e.g. broken bottle, glass)
+	 * @link: http://leafletjs.com/reference.html#marker
+	 * @type {object} customized object
+	 */
 	marker: null,
+
+	/**
+	 * Store marker added to the map, indexed by pid so we can retrieve them.
+	 * For instance, to pop them up
+	 * @type {Object}
+	 */
 	markerList: {},
 
-	//
+	/**
+	 * List of adresses to match against geoJSON data
+	 * @type {object} indexed by 'IDENT'
+	 */
 	adresses: null,
 
 	/**
@@ -45,6 +68,7 @@ var pavMap = { // pav = point d'apport volontaire
 
 	/**
 	 * Set or restore map state
+	 * @return {pavMapObject} current object
 	 */
 	setMapState: function () {
 		var center = this.DEFAULT.mapCenter; // when no value
@@ -73,7 +97,7 @@ var pavMap = { // pav = point d'apport volontaire
 
 	/**
 	* Get adresses JSON file to map with data points in addItemToMap()
-	* @return {pavMap} [description]
+	* @return {pavMapObject} current object
 	*/
 	getAdress: function () {
 		var pav = this; // needed when in d3 context
@@ -94,7 +118,7 @@ var pavMap = { // pav = point d'apport volontaire
 	/**
 	* Load data on the map
 	* @param  {JSON} geojson data
-	* @return {pavMap}
+	* @return {pavMapObject} current object
 	*/
 	addItemToMap: function () {
 		var pav = this; // needed when in d3 context
@@ -151,7 +175,7 @@ var pavMap = { // pav = point d'apport volontaire
 
 	/**
 	* Define custom icon
-	* @type {pavMap}
+	* @return {pavMapObject} current object
 	*/
 	customizeMarker: function () {
 		this.marker = L.icon({
@@ -190,7 +214,7 @@ var pavMap = { // pav = point d'apport volontaire
 
 	/**
 	 * Initialization of core map settings
-	 * @type {pavMap}
+	 * @return {pavMapObject} current object
 	 */
 	init: function () {
 		this.map = L.map('map', {
