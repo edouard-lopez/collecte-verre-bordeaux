@@ -125,8 +125,8 @@ var pavMap = { // pav = point d'apport volontaire
 	*/
 	customizeMarker: function () {
 		this.marker = L.icon({
-			iconUrl: 'images/broken-bottle.png',
-			shadowUrl: 'images/broken-bottle.shadow.png',
+			iconUrl: 'images/icon.png',
+			shadowUrl: 'images/icon.shadow.png',
 
 			iconSize:     [19, 32], // size of the icon
 			shadowSize:   [29, 32], // size of the shadow
