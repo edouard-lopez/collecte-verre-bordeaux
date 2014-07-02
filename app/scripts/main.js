@@ -227,8 +227,8 @@ var pavMap = { // pav = point d'apport volontaire
 
 };
 
-(function (window, document, map) {
-	map.init()
+(function (window, document, _) {
+	_.init()
 		.addLayerToMap()
 		.customizeMarker()
 		.setMapState()
@@ -237,5 +237,4 @@ var pavMap = { // pav = point d'apport volontaire
 			app.addItemToMap().then(function (app) {
 				app.highlightMarker() });
 		});
-
 }(window, document, pavMap));
