@@ -202,10 +202,10 @@ var pavMap = { // pav = point d'apport volontaire
 			{
 				id: 'edouard-lopez.ik52o4kd',
 				continuousWorld: true,  // very important
-				attribution: ''
-				+ '© <a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La CUB</a>'
-				+ ' | '
-				+ '© <a href="http://ourecycler.fr/point-collecte/33800/Bordeaux">OùRecycler.fr</a>'
+				attribution: '' +
+				'© <a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La CUB</a>' +
+				' | ' +
+				'© <a href="http://ourecycler.fr/point-collecte/33800/Bordeaux">OùRecycler.fr</a>'
 			}
 		).addTo(this.map);
 
