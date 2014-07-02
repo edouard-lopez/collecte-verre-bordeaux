@@ -60,7 +60,6 @@ var pavMap = { // pav = point d'apport volontaire
 			var pid = rePav.exec(hash)[1];
 			var selector = sprintf('[alt="%s"]', pid);
 
-			console.info(pid, this.markerList)
 			$(selector).attr('src', 'images/icon.active.png');
 			this.markerList[pid].openPopup();
 		}
@@ -133,7 +132,7 @@ var pavMap = { // pav = point d'apport volontaire
 								icon: pav.marker,
 								alt: '<placeholder>',
 							}
-			                	);
+						);
 					},
 					onEachFeature: function (feature, layer) {
 						var id = feature.properties.IDENT;
@@ -149,7 +148,6 @@ var pavMap = { // pav = point d'apport volontaire
 							'	<dd><a href="#c=%s&pav=%s&z=%d" target="_blank">%s <i class="fa fa-external-link"></i></a></dd>' +
 							'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>' +
 							'	<dd><small>%s</small></dd>' +
-							// '	<dd><small>%s</small></dd>' +
 							'</dl>',
 							label, latLng, id, zoom, latLng, id
 						);
@@ -222,8 +220,7 @@ var pavMap = { // pav = point d'apport volontaire
 			zoom: this.DEFAULT.zoom,
 			minZoom: 0,
 			maxZoom: 18,
-		});
-		// this.customizeMarker();
+		})
 
 		return this;
 	}
