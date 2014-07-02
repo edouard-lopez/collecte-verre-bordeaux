@@ -139,7 +139,7 @@ var pavMap = { // pav = point d'apport volontaire
 						var id = feature.properties.IDENT;
 						var label = id in pav.adresses ? pav.adresses[id] :  'rue inconnue.';
 						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
-						var zoom = pav.map.getZoom();
+						var zoom = pav.map.getZoom() || pav.DEFAULT.mapZoom ;
 
 						var html = sprintf(
 							'<dl class="dl-horizontal">' +
