@@ -41,10 +41,10 @@ fix-reverse-location: app/scripts/location2adresses.json
 # @format: JSON
 app/scripts/location2adresses.json:
 	@printf "Fixing…\n\tMalformed JSON\n"
-	head -n -1 .tmp/reverse-location2adresses.json \
+	@head -n -1 .tmp/reverse-location2adresses.json \
 		| awk '{ print } END {printf "]"}' \
 		| jq 'reduce .[] as $$i ({}; . + {"\($$i.lon),\($$i.lat)": "\($$i.display_name)"})' \
-		| sed 's/, Gironde.*"/"/g' \
+		| sed 's/, Bordeaux, Gironde.*"/"/g' \
 	> $@
 
 
