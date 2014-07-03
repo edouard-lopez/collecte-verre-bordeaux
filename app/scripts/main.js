@@ -29,6 +29,15 @@ var pavMap = { // pav = point d'apport volontaire
 	},
 
 	/**
+	 * Map state
+	 * @type {Object}
+	 */
+	STATE: {
+		center: null,
+		zoom: null
+	},
+
+	/**
 	 * Marker object used by leaftlet (e.g. broken bottle, glass)
 	 * @link: http://leafletjs.com/reference.html#marker
 	 * @type {object} customized object
@@ -47,6 +56,40 @@ var pavMap = { // pav = point d'apport volontaire
 	 * @type {object} indexed by 'IDENT'
 	 */
 	adresses: null,
+
+
+	/**
+	 * Location detection ERROR listener
+	 * @param  {Object} e event handler data
+	 * @return {void}
+	 */
+	onLocationError: function (e) {
+		alert(e.message);
+	},
+
+	/**
+	 * Location detection SUCCESS listener
+	 * @param  {Object} e 	event handler data
+	 * @param  {Object} pav current context
+	 * @return {void}
+	 */
+	onLocationFound: function (e, pav) {
+		var radius = e.accuracy / 2;
+
+		L.marker(e.latlng)
+			.addTo(pav.map)
+			// .bindPopup("You are within " + radius + " meters from this point")
+			// .openPopup()
+		;
+		L.circle(
+			e.latlng,
+			radius,
+			{
+				color: '#3465a4',
+				fillColor: '#729fcf',
+			}
+		).addTo(pav.map);
+	},
 
 	/**
 	 * Hightlight marker given in the URL fragment attribut 'pav'
@@ -70,8 +113,8 @@ var pavMap = { // pav = point d'apport volontaire
 	 * @return {pavMapObject} current object
 	 */
 	setMapState: function () {
-		var center = this.DEFAULT.mapCenter; // when no value
-		var zoom = this.DEFAULT.mapZoom ;
+		this.STATE.center = this.DEFAULT.mapCenter; // when no value
+		this.STATE.zoom = this.DEFAULT.mapZoom ;
 
 		var reCenter = /c=(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)/;
 		var reZoom = /z=(\d{1,2})/;
@@ -79,17 +122,18 @@ var pavMap = { // pav = point d'apport volontaire
 		var hash = window.location.hash;
 		if (hash !== "" && hash !== null) {
 			var _center = reCenter.exec(hash);
-			var zoom = reZoom.exec(hash)[1] || this.DEFAULT.mapZoom ;
+			this.STATE.zoom = reZoom.exec(hash)[1] || this.DEFAULT.mapZoom ;
 
 			if (_center !== null) {
 				var lat = _center[1];
 				var lng = _center[3];
 				if (_center.length === 3) { lat = _center[1]; lng = _center[2]; }
-				center = new L.LatLng(lat, lng);
+				this.STATE.center = new L.LatLng(lat, lng) || this.DEFAULT.mapCenter;
 			}
-
 		}
-		this.map.setView(center, zoom);
+		this.map
+			.setView(this.STATE.center, this.STATE.zoom)
+			.locate({setView: true, maxZoom: 16})
 
 		return this;
 	},
@@ -221,6 +265,9 @@ var pavMap = { // pav = point d'apport volontaire
 			minZoom: 0,
 			maxZoom: 18,
 		})
+		var pav = this; // look ugly
+		this.map.on('locationfound', function (e) { pav.onLocationFound(e, pav);} );
+		this.map.on('locationerror', function (e) { pav.onLocationError(e, pav);} );
 
 		return this;
 	}
