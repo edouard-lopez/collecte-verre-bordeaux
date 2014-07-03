@@ -146,7 +146,7 @@ var pavMap = { // pav = point d'apport volontaire
 		var pav = this; // needed when in d3 context
 
 		return new Promise(function (resolve, reject) {
-			d3.json('scripts/adresses.json', function (adr) {
+			d3.json('scripts/location2adresses.json', function (adr) {
 				pav.adresses = adr;
 
 				if (pav.adresses !== null) {
@@ -180,7 +180,8 @@ var pavMap = { // pav = point d'apport volontaire
 					},
 					onEachFeature: function (feature, layer) {
 						var id = feature.properties.IDENT;
-						var label = id in pav.adresses ? pav.adresses[id] :  'rue inconnue.';
+						var cid = feature.geometry.coordinates[0] + ',' + feature.geometry.coordinates[1];
+						var label = cid in pav.adresses ? pav.adresses[cid] :  'rue inconnue.';
 						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
 						var zoom = pav.map.getZoom() || pav.DEFAULT.mapZoom ;
 

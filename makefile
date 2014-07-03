@@ -25,37 +25,47 @@ default:		install clean .tmp \
 			.tmp/${dataFile} \
 			.tmp/${dataFile}.geo.json \
 			.tmp/${dataFile}.topo.json \
-			.tmp/adresses.xml \
-			.tmp/adresses.xml \
-			app/scripts/adresses.json
+			.tmp/reverse-location2adresses.json \
+			app/scripts/location2adresses.json \
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}
 convert2geojson: .tmp/${dataFile}.geo.json
 convert2geojsonVanilla: .tmp/${dataFile}.vanilla.geo.json
 convert2topojson: .tmp/${dataFile}.topo.json
-get-adresses: .tmp/adresses.xml
-adresses2json: app/scripts/adresses.json
+reverse-location2adresses: .tmp/reverse-location2adresses.json
+fix-reverse-location: app/scripts/location2adresses.json
 
-# Convert to JSON and reduce to {'id': 'street-name'} array
-# @warning: current 'jq' command doesn't support duplicate key!
-# @alias: adresses2json
+
+# Reverse Geocoding: http://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
+# @alias: fix-reverse-location
 # @format: JSON
-app/scripts/adresses.json:
-	@printf "Reducing as JSON…\n"
-	xml2json < .tmp/adresses.xml \
-		| jq 'reduce .markers.marker[] as $$item ({}; . + {"\($$item.avancee)":$$item.addresse})' \
-	 > $@
+app/scripts/location2adresses.json:
+	@printf "Fixing…\n\tMalformed JSON\n"
+	head -n -1 .tmp/reverse-location2adresses.json \
+		| awk '{ print } END {printf "]"}' \
+		| jq 'reduce .[] as $$i ({}; . + {"\($$i.lon),\($$i.lat)": "\($$i.display_name)"})' \
+		| sed 's/, Gironde.*"/"/g' \
+	> $@
 
 
-# Fetch adress (street name) from http://ourecycler.fr/point-collecte/33800/Bordeaux
-# @alias: get-adresses
-# @format: XML
-.tmp/adresses.xml:
+# Reverse Geocoding: http://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
+# @alias: reverse-reverse-location2adresses
+# @format: JSON
+.tmp/reverse-location2adresses.json:
 	@printf "Fetching…\n\tAdresses\n"
-	@curl --progress-bar --output $@ \
-		-H 'Accept: text/html,application/xhtml+xml,application/xml' \
-		-H 'Referer: http://ourecycler.fr/' \
-		'http://ourecycler.fr/generateur.php?SO_Lt=44.72813137800844&SO_Lg=-0.7978765942382324&NE_Lt=44.94723833119456&NE_Lg=-0.36048340576166993&typ=1&dech=1'
+	@rm -f $@
+
+	@printf "Geo-reversing...\n"
+	@printf '[\n' >> $@
+	@while read -r lat lng; do \
+		(( cnt++ )); \
+		printf "\t%d: %s, %s\n" "$$cnt" "$$lat" "$$lng"; \
+		curl --silent --show-error --user-agent 'Makefile Script (~912 items)' \
+			"http://nominatim.openstreetmap.org/reverse?format=json&lat=$$lat&lon=$${lng}&zoom=17&addressdetails=1&email=dev+osm@edouard-lopez.com" \
+			| jq '.lon = "'$$lng'" | .lat = "'$$lat'" ' \
+			| awk '{ print } END { printf ","}' \
+		>> $@; \
+	done < <(jq -r '.features[] .geometry .coordinates | "\(.[1]) \(.[0])" ' .tmp/${dataFile}.geo.json)
 
 
 # Convert from GeoJSON to TopoJSON
