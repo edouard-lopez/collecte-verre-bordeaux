@@ -89,7 +89,7 @@ app/scripts/location2adresses.json:
 # @format: geoJSON
 .tmp/${dataFile}.geo.json: extract-emplacements
 	@printf "Converting…\n\tShapefile → GeoJSON\n"
-	ogr2ogr \
+	@ogr2ogr \
 		-f GeoJSON \
 		-t_srs EPSG:4326 \
 		-lco COORDINATE_PRECISION=7 \
@@ -100,7 +100,8 @@ app/scripts/location2adresses.json:
 # Convert from Shapefile to geoJSON with all fields
 # @alias: convert2geojsonVanilla
 .tmp/${dataFile}.vanilla.geo.json: extract-emplacements
-	ogr2ogr \
+	@printf "Converting…\n\tShapefile → GeoJSON (Vanilla)\n"
+	@ogr2ogr \
 		-f GeoJSON \
 		-t_srs EPSG:4326 \
 		-lco COORDINATE_PRECISION=7 \
