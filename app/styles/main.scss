@@ -16,6 +16,9 @@ body {
 	padding: 0;
 	margin: 0;
 }
+html, body, #map {
+	height: 100%;
+}
 
 .header {
 	position: absolute;
@@ -40,24 +43,29 @@ body {
 					$dist+3 	$dist+3 	$shw #fff,
 	;
 }
-.map-app {
+#map {
 	height: 100%;
-	min-width: 40%;
-	.map {
-		min-width: 100%;
-		min-height: 600px;
-		.leaflet-popup-content {
-			margin-left: .5em;
-			.dl-horizontal {
-				$defSize: 3.5em;
-				margin-bottom: 0;
-				dt {
-					width: $defSize;
-				}
-				dd {
-					margin-left: $defSize+1;
-				}
+	.leaflet-popup-content {
+		margin-left: .5em;
+		.dl-horizontal {
+			$defSize: 3.5em;
+			margin-bottom: 0;
+			dt {
+				width: $defSize;
+			}
+			dd {
+				margin-left: $defSize+1;
 			}
 		}
+	}
+}
+footer {
+	background: none repeat scroll 0% 0% hsla(0, 0%, 100%, 0.7);
+	margin: 0;
+	p.leaflet-control-attribution.leaflet-control {
+		padding: 0;
+		padding-left: .5em;
+		margin: 0;
+		font: 12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
 	}
 }
