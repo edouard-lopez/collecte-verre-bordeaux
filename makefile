@@ -26,7 +26,8 @@ default:		install clean .tmp \
 			.tmp/${dataFile}.geo.json \
 			.tmp/${dataFile}.topo.json \
 			.tmp/reverse-location2adresses.json \
-			app/scripts/location2adresses.json
+			app/scripts/location2adresses.json \
+			extract-areas
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}
 convert2geojson: .tmp/${dataFile}.geo.json
@@ -35,6 +36,15 @@ convert2topojson: .tmp/${dataFile}.topo.json
 reverse-location2adresses: .tmp/reverse-location2adresses.json
 fix-reverse-location: app/scripts/location2adresses.json
 
+# Extract list of suburbs and cities
+# @alias: extract-areas
+# @format: strout
+extract-areas:
+	@awk 'BEGIN {FS="[,( - )]" } {print $$(NF-1)}' app/scripts/location2adresses.json \
+		| sort -u \
+		| sed -e 's/^ *//' -e 's/ *$$//' -e 's/"$$//' -e 's/\(.*\)/<li>\1, <\/li>/' \
+		| grep -viP '\{|\}|ville|Sud|Chut' \
+		| tail -n +2
 
 # Reverse Geocoding: http://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
 # @alias: fix-reverse-location
