@@ -247,6 +247,8 @@ var pavMap = { // pav = point d'apport volontaire
 				attribution: '' +
 				'© <a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La CUB</a>' +
 				' | ' +
+				'© <a href="http://www.openstreetmap.org/copyright"><abbr title="OpenStreetMap">OSM</abbr>, ODbL 1.0</a>' +
+				' | ' +
 				'© <a href="http://ourecycler.fr/point-collecte/33800/Bordeaux">OùRecycler.fr</a>'
 			}
 		).addTo(this.map);
