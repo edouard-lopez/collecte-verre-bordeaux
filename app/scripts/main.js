@@ -160,6 +160,25 @@ var pavMap = { // pav = point d'apport volontaire
 	},
 
 	/**
+	/**
+	 * Return HTML content for pop.
+	 * @param  {Object} d data to inject in template
+	 * @return {HTML}   HTML content
+	 */
+	getPopupContent: function (d) {
+		return sprintf(
+			'<dl class="active-popup dl-horizontal">' +
+			'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>' +
+			'	<dd>%s</dd>' +
+			'	<dt class="text-muted"><abbr title="Ouvrir dans un nouvel onglet">coord.</abbr>:</dt>' +
+			'	<dd><a href="#c=%s&pav=%s&z=%d" target="_blank" class="share">%s <i class="fa fa-external-link"></i></a></dd>' +
+			'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>' +
+			'	<dd><small>%s</small></dd>' +
+			'</dl>',
+			d.label, d.latLng, d.id, d.zoom, d.latLng, d.id
+		);
+	},
+
 	* Load data on the map
 	* @param  {JSON} geojson data
 	* @return {pavMapObject} current object
@@ -188,18 +207,14 @@ var pavMap = { // pav = point d'apport volontaire
 							label = label.join('<br/>');
 						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
 						var zoom = pav.map.getZoom() || pav.DEFAULT.mapZoom ;
+						var d = {
+							id: id,
+							label: label,
+							zoom: zoom,
+							latLng: latLng
+						};
+						var html = pav.getPopupContent(d);
 
-						var html = sprintf(
-							'<dl class="dl-horizontal">' +
-							'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>' +
-							'	<dd>%s</dd>' +
-							'	<dt class="text-muted"><abbr title="Ouvrir dans un nouvel onglet">coord.</abbr>:</dt>' +
-							'	<dd><a href="#c=%s&pav=%s&z=%d" target="_blank">%s <i class="fa fa-external-link"></i></a></dd>' +
-							'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>' +
-							'	<dd><small>%s</small></dd>' +
-							'</dl>',
-							label, latLng, id, zoom, latLng, id
-						);
 						layer.options.alt = id; // add attribute to <img>, used for URL reference
 						layer
 							.bindPopup(html, {className: 'code'+id })
