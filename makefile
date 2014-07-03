@@ -134,7 +134,6 @@ clean:
 	@printf "Cleaning…\n\t.tmp/ directory\n"
 	@rm -rf .tmp
 	@rm -f app/scripts/emplacements*.json
-	@rm -f app/scripts/adresses*.json
 
 
 # Install tooling and library
