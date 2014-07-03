@@ -79,7 +79,7 @@ app/scripts/location2adresses.json:
 		--simplify-proportion 0.025 \
 		.tmp/${dataFile}.geo.json \
 	| underscore print > $@
-	ln -nf $@ app/scripts/
+	@cp $@ app/scripts/
 
 
 # Convert from Shapefile to geoJSON keeping only interesting fields and changing projection:
@@ -95,7 +95,7 @@ app/scripts/location2adresses.json:
 		-lco COORDINATE_PRECISION=7 \
 		-sql "SELECT CAST(GID as Integer), IDENT, MDATE FROM EN_EMPAC_P" \
 		$@ .tmp/${dataFile}/*.shp
-	ln -nf $@ app/scripts/
+	@cp $@ app/scripts/
 
 # Convert from Shapefile to geoJSON with all fields
 # @alias: convert2geojsonVanilla
