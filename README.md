@@ -16,8 +16,8 @@ You may also find the website [Où recycler.fr](http://ourecycler.fr/point-colle
 
 Start by cloning the project repository:
 ```bash
-git clone https://github.com/edouard-lopez/dataviz-cub-pav.git
-cd dataviz-cub-pav
+git clone https://github.com/edouard-lopez/collecte-verre-cub.git
+cd collecte-verre-cub
 ```
 And install some tooling:
 ```bash
