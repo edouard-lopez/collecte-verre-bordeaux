@@ -160,6 +160,18 @@ var pavMap = { // pav = point d'apport volontaire
 	},
 
 	/**
+	 * Update popup content (share URL) on zoom end
+	 * @param  {Object} pav current instance
+	 * @return {void}
+	 */
+	updatePopupZoomLevel: function (pav) {
+		return function () {
+			var shareLink = $('.active-popup .share');
+			var newLink = shareLink.attr('href').replace(/z=(\d{1,2})/, 'z=' + pav.map.getZoom());
+			shareLink.attr('href', newLink);
+		};
+	},
+
 	/**
 	 * Return HTML content for pop.
 	 * @param  {Object} d data to inject in template
@@ -179,6 +191,7 @@ var pavMap = { // pav = point d'apport volontaire
 		);
 	},
 
+	/**
 	* Load data on the map
 	* @param  {JSON} geojson data
 	* @return {pavMapObject} current object
@@ -218,10 +231,8 @@ var pavMap = { // pav = point d'apport volontaire
 						layer.options.alt = id; // add attribute to <img>, used for URL reference
 						layer
 							.bindPopup(html, {className: 'code'+id })
-						.on('click', function() {
-								console.log(latLng);
-							}
-						);
+							.on('click', pav.updatePopupZoomLevel(pav), false )
+						;
 						pav.markerList[id] = layer;
 					 }
 				}
@@ -306,4 +317,5 @@ var pavMap = { // pav = point d'apport volontaire
 			})
 			;
 		});
+	_.map.on('zoomend', _.updatePopupZoomLevel(_));
 }(window, document, pavMap));
