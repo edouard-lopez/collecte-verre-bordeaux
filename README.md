@@ -7,7 +7,9 @@ Dataviz project to visualize different type of trash collecting point
 ## Data Sources
 
 * geo-location come from [official Gironde Open Data portal](http://www.datalocale.fr/dataset/en_empac_p) ;
-* adress from the [http://ourecycler.fr/point-collecte/33800/Bordeaux](Ourecycler.fr) website.
+* adress from [OpenStreetMap Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim).
+
+You may also find the website [Où recycler.fr](http://ourecycler.fr/point-collecte/33800/Bordeaux) interesting.
 
 
 # Install
