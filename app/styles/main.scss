@@ -17,6 +17,29 @@ body {
 	margin: 0;
 }
 
+.header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	margin: 0;
+	margin-left: 2em;
+	padding: 0.5em;
+	color: #333;
+	$shw: 2px;
+	$dist: 0px;
+	text-shadow: $dist $dist $shw #eee,
+					($dist - 1)	($dist)		$shw #fff,
+					($dist - 2)	($dist)		$shw #fff,
+					($dist - 3)	($dist)		$shw #fff,
+					($dist)		($dist - 1)	$shw #fff,
+					($dist)		($dist - 2)	$shw #fff,
+					($dist)		($dist - 3)	$shw #fff,
+					$dist+1 	$dist+1 	$shw #fff,
+					$dist+2 	$dist+2 	$shw #fff,
+					$dist+3 	$dist+3 	$shw #fff,
+	;
+}
 .map-app {
 	height: 100%;
 	min-width: 40%;
