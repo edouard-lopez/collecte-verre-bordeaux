@@ -87,7 +87,7 @@ app/scripts/location2adresses.json:
 # 	* to :	EPSG:4326 → WGS 84
 # @alias: convert2geojson
 # @format: geoJSON
-.tmp/${dataFile}.geo.json:
+.tmp/${dataFile}.geo.json: extract-emplacements
 	@printf "Converting…\n\tShapefile → GeoJSON\n"
 	ogr2ogr \
 		-f GeoJSON \
@@ -99,7 +99,7 @@ app/scripts/location2adresses.json:
 
 # Convert from Shapefile to geoJSON with all fields
 # @alias: convert2geojsonVanilla
-.tmp/${dataFile}.vanilla.geo.json:
+.tmp/${dataFile}.vanilla.geo.json: extract-emplacements
 	ogr2ogr \
 		-f GeoJSON \
 		-t_srs EPSG:4326 \
@@ -109,7 +109,7 @@ app/scripts/location2adresses.json:
 # Extract Emplacements d'apport volontaire de la CUB
 # @alias: extract-emplacements
 # @format: Shapefile
-.tmp/${dataFile}:
+.tmp/${dataFile}: get-emplacements
 	@printf "Extracting (overwrite)…\n"
 	@unzip -q -o .tmp/${dataFile}.shp.zip -d .tmp/${dataFile}
 
