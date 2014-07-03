@@ -180,6 +180,7 @@ var pavMap = { // pav = point d'apport volontaire
 					},
 					onEachFeature: function (feature, layer) {
 						var id = feature.properties.IDENT;
+							id = id !== null ? id.replace(' ', '') : id;
 						var cid = feature.geometry.coordinates[0] + ',' + feature.geometry.coordinates[1];
 						var label = cid in pav.adresses ? pav.adresses[cid] :  'rue inconnue.';
 						var latLng = layer.getLatLng().lat+','+layer.getLatLng().lng;
