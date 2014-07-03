@@ -74,7 +74,7 @@ app/scripts/location2adresses.json:
 .tmp/${dataFile}.topo.json:
 	@printf "Convert...\n\tGeoJSON → TopoJSON\n"
 	@topojson \
-		--id-property GID \
+		--id-property IDENT \
 		--quantization 1e4 \
 		--simplify-proportion 0.025 \
 		.tmp/${dataFile}.geo.json \
@@ -93,7 +93,7 @@ app/scripts/location2adresses.json:
 		-f GeoJSON \
 		-t_srs EPSG:4326 \
 		-lco COORDINATE_PRECISION=7 \
-		-sql "SELECT CAST(GID as Integer), IDENT, MDATE FROM EN_EMPAC_P" \
+		-sql "SELECT IDENT FROM EN_EMPAC_P" \
 		$@ .tmp/${dataFile}/*.shp
 	@cp $@ app/scripts/
 
