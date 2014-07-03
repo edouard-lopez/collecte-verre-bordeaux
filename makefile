@@ -78,7 +78,7 @@ app/scripts/location2adresses.json:
 		--quantization 1e4 \
 		--simplify-proportion 0.025 \
 		.tmp/${dataFile}.geo.json \
-	| underscore print > $@
+	| jq '.' > $@
 	@cp $@ app/scripts/
 
 
