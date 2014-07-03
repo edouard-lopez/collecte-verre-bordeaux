@@ -82,7 +82,7 @@ app/scripts/adresses.json:
 	ogr2ogr \
 		-f GeoJSON \
 		-t_srs EPSG:4326 \
-		-lco COORDINATE_PRECISION=6 \
+		-lco COORDINATE_PRECISION=7 \
 		-sql "SELECT CAST(GID as Integer), IDENT, MDATE FROM EN_EMPAC_P" \
 		$@ .tmp/${dataFile}/*.shp
 	ln -nf $@ app/scripts/
@@ -93,7 +93,7 @@ app/scripts/adresses.json:
 	ogr2ogr \
 		-f GeoJSON \
 		-t_srs EPSG:4326 \
-		-lco COORDINATE_PRECISION=6 \
+		-lco COORDINATE_PRECISION=7 \
 		$@ .tmp/${dataFile}/*.shp
 
 # Extract Emplacements d'apport volontaire de la CUB
