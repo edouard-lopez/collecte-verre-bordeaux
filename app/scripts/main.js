@@ -99,7 +99,7 @@ var pavMap = { // pav = point d'apport volontaire
 		var rePav = /pav=([\d\w]+)/;
 
 		var hash = window.location.hash;
-		if (hash !== "" && hash !== null) {
+		if (hash !=='' && hash !== null) {
 			var pid = rePav.exec(hash)[1];
 			var selector = sprintf('[alt="%s"]', pid);
 
@@ -120,7 +120,7 @@ var pavMap = { // pav = point d'apport volontaire
 		var reZoom = /z=(\d{1,2})/;
 
 		var hash = window.location.hash;
-		if (hash !== "" && hash !== null) {
+		if (hash !== '' && hash !== null) {
 			var _center = reCenter.exec(hash);
 			this.STATE.zoom = reZoom.exec(hash)[1] || this.DEFAULT.mapZoom ;
 
@@ -134,6 +134,7 @@ var pavMap = { // pav = point d'apport volontaire
 		this.map
 			.setView(this.STATE.center, this.STATE.zoom)
 			.locate({setView: true, maxZoom: 16})
+		;
 
 		return this;
 	},
@@ -200,7 +201,8 @@ var pavMap = { // pav = point d'apport volontaire
 							label, latLng, id, zoom, latLng, id
 						);
 						layer.options.alt = id; // add attribute to <img>, used for URL reference
-						layer.bindPopup(html, {className: 'code'+id })
+						layer
+							.bindPopup(html, {className: 'code'+id })
 						.on('click', function() {
 								console.log(latLng);
 							}
@@ -268,11 +270,10 @@ var pavMap = { // pav = point d'apport volontaire
 			zoom: this.DEFAULT.zoom,
 			minZoom: 0,
 			maxZoom: 18,
-		})
+		});
 		var pav = this; // look ugly
 		this.map.on('locationfound', function (e) { pav.onLocationFound(e, pav);} );
 		this.map.on('locationerror', function (e) { pav.onLocationError(e, pav);} );
-
 		return this;
 	}
 
@@ -286,6 +287,8 @@ var pavMap = { // pav = point d'apport volontaire
 		.getAdress()
 		.then(function(app) {
 			app.addItemToMap().then(function (app) {
-				app.highlightMarker() });
+				app.highlightMarker();
+			})
+			;
 		});
 }(window, document, pavMap));
