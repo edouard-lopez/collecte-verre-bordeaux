@@ -169,7 +169,11 @@ gulp.task('wiredep', function () {
     gulp.src(paths.appDir+'/*.html')
         .pipe(wiredep({
             directory: paths.appDir+'/bower_components',
-            exclude: ['bootstrap-sass-official']
+            exclude: [
+            	'bootstrap-sass-official',
+            	'topojson',
+            	'leaflet-src',
+          	]
         }))
         .pipe(gulp.dest('app'));
 });
