@@ -5,7 +5,7 @@ var gulp = require('gulp');
 
 // @custom
 var project = {
-	name: 'dataviz-cub-pav',
+	name: 'collecte-verre-cub',
 	port: 9082,
 	livereloadPort: 56438
 };
