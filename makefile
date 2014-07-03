@@ -26,7 +26,7 @@ default:		install clean .tmp \
 			.tmp/${dataFile}.geo.json \
 			.tmp/${dataFile}.topo.json \
 			.tmp/reverse-location2adresses.json \
-			app/scripts/location2adresses.json \
+			app/scripts/location2adresses.json
 get-emplacements: .tmp/${dataFile}.shp.zip
 extract-emplacements: .tmp/${dataFile}
 convert2geojson: .tmp/${dataFile}.geo.json
