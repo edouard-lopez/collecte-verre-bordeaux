@@ -4,6 +4,20 @@ Dataviz project to visualize different type of trash collecting point
 
 ![dataviz preview](./preview.png)
 
+<!-- MarkdownTOC depth=3 -->
+
+- Data Sources
+- Install
+	- Getting started
+- Want to fork or scaffold a similar project ?
+- License
+	- Tools: GDAL (Geospatial Data Abstraction Library)
+	- JavaScript Libraries
+- Privacy
+
+<!-- /MarkdownTOC -->
+
+
 ## Data Sources
 
 * geo-location come from [official Gironde Open Data portal](http://www.datalocale.fr/dataset/en_empac_p) ;
