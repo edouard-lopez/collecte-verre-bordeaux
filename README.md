@@ -38,6 +38,7 @@ And install some tooling:
 npm install -g yo bower grunt-cli gulp topojson
 ```
 
+
 ### Getting started
 
 Install project dependecy using `npm` and `bower`:
@@ -51,11 +52,13 @@ gulp serve
 ```
 Start playing !
 
+
 ## Want to fork or scaffold a similar project ?
 
 ## License
 
 The Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
+
 
 ### Tools: GDAL (Geospatial Data Abstraction Library)
 
@@ -63,6 +66,7 @@ To manipulate Shapefile, you need to have [`ogr2ogr`](http://www.gdal.org/ogr2og
 ```bash
 sudo apt-get install gdal-bin
 ```
+
 
 ### JavaScript Libraries
 
@@ -91,6 +95,7 @@ Finish by running `gulp` for building and gulp watch for preview :
 ```bash
 gulp watch
 ```
+
 
 ## Privacy
 
