@@ -12,7 +12,7 @@ Dataviz project to visualize different type of trash collecting point
 You may also find the website [Où recycler.fr](http://ourecycler.fr/point-collecte/33800/Bordeaux) interesting.
 
 
-# Install
+## Install
 
 Start by cloning the project repository:
 ```bash
@@ -24,7 +24,7 @@ And install some tooling:
 npm install -g yo bower grunt-cli gulp topojson
 ```
 
-# Getting started
+### Getting started
 
 Install project dependecy using `npm` and `bower`:
 ```bash
