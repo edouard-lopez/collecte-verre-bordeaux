@@ -37,7 +37,11 @@ gulp serve
 ```
 Start playing !
 
-## Want to scaffold a similar project ?
+## Want to fork or scaffold a similar project ?
+
+## License
+
+The Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
 
 ### Tools: GDAL (Geospatial Data Abstraction Library)
 
@@ -75,7 +79,5 @@ gulp watch
 ```
 
 ## Privacy
-### License
 
 The use of **geo-location is completely optional**. Being done client-side there is no data store or collected by this app.
-Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
