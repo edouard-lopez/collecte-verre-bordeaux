@@ -8,6 +8,7 @@ Dataviz project to visualize different type of trash collecting points in the ar
 
 - Data Sources
 - Install
+	- Makefile
 	- Getting started
 - Want to fork or scaffold a similar project ?
 	- License
@@ -36,6 +37,16 @@ cd collecte-verre-cub
 And install some tooling:
 ```bash
 npm install -g yo bower grunt-cli gulp topojson
+```
+### Makefile
+
+There is a [makefile](./makefile) that automate the installation and data-mining tasks.
+
+The default task will build a working environment and process data, you only need to run `make` in the project root directory. That is the equivalent to run:
+
+```bash
+make install clean .tmp
+make get-emplacements extract-emplacements convert2geojson convert2geojsonVanilla convert2topojson reverse-location2adresses fix-reverse-location
 ```
 
 
