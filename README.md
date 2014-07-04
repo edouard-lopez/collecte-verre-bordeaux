@@ -1,6 +1,6 @@
 # Dataviz CUB: point d'apports volontaires
 
-Dataviz project to visualize different type of trash collecting point
+Dataviz project to visualize different type of trash collecting points in the area of Bordeaux, France.
 
 ![dataviz preview](./preview.png)
 
