@@ -278,7 +278,7 @@ var pavMap = { // pav = point d'apport volontaire
 	* Location of tiles (see next paragraph)
 	* @type {Object}
 	*/
-	addLayerToMap: function () {
+	attachTileLayer: function () {
 		new L.tileLayer(
 			'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
 			{
@@ -324,12 +324,11 @@ var pavMap = { // pav = point d'apport volontaire
 		this.map.on('locationerror', function (e) { pav.onLocationError(e, pav);} );
 		return this;
 	}
-
 };
 
 (function (window, document, _) {
 	_.init()
-		.addLayerToMap()
+		.attachTileLayer()
 		.attachClusterLayer()
 		.customizeMarker()
 		.setMapState()
