@@ -167,8 +167,10 @@ var pavMap = { // pav = point d'apport volontaire
 	updatePopupZoomLevel: function (pav) {
 		return function () {
 			var shareLink = $('.active-popup .share');
-			var newLink = shareLink.attr('href').replace(/z=(\d{1,2})/, 'z=' + pav.map.getZoom());
-			shareLink.attr('href', newLink);
+			if (shareLink.length > 0) {
+				var newLink = shareLink.attr('href').replace(/z=(\d{1,2})/, 'z=' + pav.map.getZoom());
+				shareLink.attr('href', newLink);
+			}
 		};
 	},
 
