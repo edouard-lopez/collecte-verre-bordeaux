@@ -1,128 +1,128 @@
 <!doctype html>
 <html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <title>Collecte du verre › CUB</title>
-        <meta name="description" content="points de collecte du verre dans la CUB">
-        <meta name="keywords" content="points de collecte, verre, recyclage, CUB, Bordeaux, Bègles, Pessac, ">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<head>
+		<meta charset="utf-8">
+		<title>Collecte du verre › CUB</title>
+		<meta name="description" content="points de collecte du verre dans la CUB">
+		<meta name="keywords" content="points de collecte, verre, recyclage, CUB, Bordeaux, Bègles, Pessac, ">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css styles/vendor.css -->
-        <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-        <!-- endbower -->
+		<!-- build:css styles/vendor.css -->
+		<!-- bower:css -->
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+		<!-- endbower -->
 	<link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
 	<link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-        <!-- endbuild -->
+		<!-- endbuild -->
 
-        <!-- build:css styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
+		<!-- build:css styles/main.css -->
+		<link rel="stylesheet" href="styles/main.css">
+		<!-- endbuild -->
 
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+	</head>
+	<body>
+		<!--[if lt IE 10]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
 
-		<section>
-			<h3 class="header"><abbr title="Communauté Urbaine de Bordeaux (Gironde)">CUB</abbr> › Collecte du verre</h3>
-		</section>
-		<div id="map" >
-			<!-- map injected here -->
-		</div>
-		<div class="metadata leaflet-bottom leaflet-left">
-			<p class="leaflet-control-attribution leaflet-control">
-				by
-				<a href="https://twitter.com/edouard_lopez">
-					<i class="fa fa-twitter"></i>
-					@Edouard_Lopez
-				</a>,
-				<i class="fa fa-github fa-lg"></i><a href="https://github.com/edouard-lopez/collecte-verre-cub"> Fork me!</a>.
-				Using
-				<a href="http://leafletjs.com/">Leaflet</a>,
-				<a href="http://d3js.org/">D3.js</a>,
-				and data from
-				<a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La <abbr title="Communauté Urbaine de Bordeaux (Gironde)">CUB</abbr></a>,
-				<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>.
-			</p>
-		</div>
-		<div class="list-city">
-			<p>Des points de collecte pour les villes et quartiers suivants sont disponibles:</p>
-			<ul class="list-inline">
-				<li>Ambarès-et-Lagrave, </li>
-				<li>Ambès, </li>
-				<li>Artigues-près-Bordeaux, </li>
-				<li>Aubiers, </li>
-				<li>Bacalan, </li>
-				<li>Bassens, </li>
-				<li>Bastide, </li>
-				<li>Bègles, </li>
-				<li>Blanquefort, </li>
-				<li>Bouliac, </li>
-				<li>Bouscat, </li>
-				<li>Bruges, </li>
-				<li>Cadaujac, </li>
-				<li>Canéjan, </li>
-				<li>Carbon-Blanc, </li>
-				<li>Carriet, </li>
-				<li>Caudéran, </li>
-				<li>Cenon, </li>
-				<li>Doumer, </li>
-				<li>Eysines, </li>
-				<li>Floirac, </li>
-				<li>France, </li>
-				<li>Gradignan, </li>
-				<li>Grand-Parc, </li>
-				<li>Haillan, </li>
-				<li>Lormont, </li>
-				<li>Maritime, </li>
-				<li>Mérignac, </li>
-				<li>Parempuyre, </li>
-				<li>Pessac, </li>
-				<li>Saint-Aubin-de-Médoc, </li>
-				<li>Saint-Augustin, </li>
-				<li>Saint-Genès, </li>
-				<li>Saint-Louis-de-Montferrand, </li>
-				<li>Saint-Médard-en-Jalles, </li>
-				<li>Saint-Vincent-de-Paul, </li>
-				<li>Taillan-Médoc, </li>
-				<li>Talence, </li>
-				<li>Teycheney, </li>
-				<li>Vigean, </li>
-				<li>Yvrac. </li>
-			</ul>
-		</div>
+	<section>
+		<h3 class="header"><abbr title="Communauté Urbaine de Bordeaux (Gironde)">CUB</abbr> › Collecte du verre</h3>
+	</section>
+	<div id="map" >
+		<!-- map injected here -->
+	</div>
+	<div class="metadata leaflet-bottom leaflet-left">
+		<p class="leaflet-control-attribution leaflet-control">
+		by
+		<a href="https://twitter.com/edouard_lopez">
+			<i class="fa fa-twitter"></i>
+			@Edouard_Lopez
+		</a>,
+		<i class="fa fa-github fa-lg"></i><a href="https://github.com/edouard-lopez/collecte-verre-cub"> Fork me!</a>.
+		Using
+		<a href="http://leafletjs.com/">Leaflet</a>,
+		<a href="http://d3js.org/">D3.js</a>,
+		and data from
+		<a href="http://metadata.lacub.fr/geosource/apps/search/?uuid=1f8a4be0-900e-4eab-9dcf-55cd9f0a1aed">La <abbr title="Communauté Urbaine de Bordeaux (Gironde)">CUB</abbr></a>,
+		<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>.
+		</p>
+	</div>
+	<div class="list-city">
+		<p>Des points de collecte pour les villes et quartiers suivants sont disponibles:</p>
+		<ul class="list-inline">
+		<li>Ambarès-et-Lagrave, </li>
+		<li>Ambès, </li>
+		<li>Artigues-près-Bordeaux, </li>
+		<li>Aubiers, </li>
+		<li>Bacalan, </li>
+		<li>Bassens, </li>
+		<li>Bastide, </li>
+		<li>Bègles, </li>
+		<li>Blanquefort, </li>
+		<li>Bouliac, </li>
+		<li>Bouscat, </li>
+		<li>Bruges, </li>
+		<li>Cadaujac, </li>
+		<li>Canéjan, </li>
+		<li>Carbon-Blanc, </li>
+		<li>Carriet, </li>
+		<li>Caudéran, </li>
+		<li>Cenon, </li>
+		<li>Doumer, </li>
+		<li>Eysines, </li>
+		<li>Floirac, </li>
+		<li>France, </li>
+		<li>Gradignan, </li>
+		<li>Grand-Parc, </li>
+		<li>Haillan, </li>
+		<li>Lormont, </li>
+		<li>Maritime, </li>
+		<li>Mérignac, </li>
+		<li>Parempuyre, </li>
+		<li>Pessac, </li>
+		<li>Saint-Aubin-de-Médoc, </li>
+		<li>Saint-Augustin, </li>
+		<li>Saint-Genès, </li>
+		<li>Saint-Louis-de-Montferrand, </li>
+		<li>Saint-Médard-en-Jalles, </li>
+		<li>Saint-Vincent-de-Paul, </li>
+		<li>Taillan-Médoc, </li>
+		<li>Talence, </li>
+		<li>Teycheney, </li>
+		<li>Vigean, </li>
+		<li>Yvrac. </li>
+		</ul>
+	</div>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-15879983-5');ga('send','pageview');
-        </script>
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<script>
+			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+			e.src='//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+			ga('create','UA-15879983-5');ga('send','pageview');
+		</script>
 
-        <!-- build:js scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/d3/d3.js"></script>
-        <script src="bower_components/leaflet/dist/leaflet.js"></script>
-        <script src="bower_components/es6-promise/promise.js"></script>
-        <script src="bower_components/sprintf/src/sprintf.js"></script>
-        <!-- endbower -->
+		<!-- build:js scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/d3/d3.js"></script>
+		<script src="bower_components/leaflet/dist/leaflet.js"></script>
+		<script src="bower_components/es6-promise/promise.js"></script>
+		<script src="bower_components/sprintf/src/sprintf.js"></script>
+		<!-- endbower -->
 	<script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-        <!-- endbuild -->
+		<!-- endbuild -->
 
-        <!-- build:js scripts/plugins.js -->
-        <!-- endbuild -->
+		<!-- build:js scripts/plugins.js -->
+		<!-- endbuild -->
 
-        <!-- build:js scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+		<!-- build:js scripts/main.js -->
+		<script src="scripts/main.js"></script>
+		<!-- endbuild -->
 </body>
 </html>
