@@ -74,6 +74,8 @@ Finish by running `gulp` for building and gulp watch for preview :
 gulp watch
 ```
 
+## Privacy
 ### License
 
+The use of **geo-location is completely optional**. Being done client-side there is no data store or collected by this app.
 Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
