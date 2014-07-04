@@ -99,7 +99,7 @@ Then install others dependencies:
 
 ```bash
 npm install --save-dev jq xml2json-command topojson generator-gulp-webapp gulp gulp-sass
-bower install --save topojson font-awesome d3 d3-plugins
+bower install --save topojson font-awesome d3 leaflet leaflet.markercluster es6-promise
 ```
 
 Finish by running `gulp` for building and gulp watch for preview :
