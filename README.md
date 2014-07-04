@@ -10,7 +10,7 @@ Dataviz project to visualize different type of trash collecting points in the ar
 - Install
 	- Getting started
 - Want to fork or scaffold a similar project ?
-- License
+	- License
 	- Tools: GDAL (Geospatial Data Abstraction Library)
 	- JavaScript Libraries
 - Privacy
@@ -55,7 +55,7 @@ Start playing !
 
 ## Want to fork or scaffold a similar project ?
 
-## License
+### License
 
 The Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
 
