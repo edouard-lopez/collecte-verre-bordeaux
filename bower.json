@@ -10,7 +10,8 @@
     "d3-plugins": "*",
     "leaflet": "~0.7.3",
     "es6-promise": "~1.0.0",
-    "sprintf": "~1.0.0"
+    "sprintf": "~1.0.0",
+    "leaflet.markercluster": "~0.4.0"
   },
   "devDependencies": {}
 }

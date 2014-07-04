@@ -38,6 +38,12 @@ var pavMap = { // pav = point d'apport volontaire
 	},
 
 	/**
+	 * Layer to cluster markers
+	 * @type {MarkerClusterGroupObject}
+	 */
+	cluster: null,
+
+	/**
 	 * Marker object used by leaftlet (e.g. broken bottle, glass)
 	 * @link: http://leafletjs.com/reference.html#marker
 	 * @type {object} customized object
@@ -238,7 +244,7 @@ var pavMap = { // pav = point d'apport volontaire
 						pav.markerList[id] = layer;
 					 }
 				}
-			).addTo(pav.map);
+			).addTo(pav.cluster);
 
 			if (Object.keys(pav.markerList).length > 0) {
 				resolve(pav);
@@ -289,6 +295,20 @@ var pavMap = { // pav = point d'apport volontaire
 	},
 
 	/**
+	* Markers' cluster Layer
+	* @type {Object}
+	*/
+	attachClusterLayer: function () {
+		this.cluster = new L.MarkerClusterGroup({
+			showCoverageOnHover: false,
+			maxClusterRadius: 80,
+			disableClusteringAtZoom: 16
+		}).addTo(this.map);
+
+		return this;
+	},
+
+	/**
 	 * Initialization of core map settings
 	 * @return {pavMapObject} current object
 	 */
@@ -310,6 +330,7 @@ var pavMap = { // pav = point d'apport volontaire
 (function (window, document, _) {
 	_.init()
 		.addLayerToMap()
+		.attachClusterLayer()
 		.customizeMarker()
 		.setMapState()
 		.getAdress()
