@@ -24,8 +24,8 @@ var pavMap = { // pav = point d'apport volontaire
 	 * @type {Object}
 	 */
 	DEFAULT: {
-		mapCenter: new L.LatLng(44.8442, -0.5933),
-		mapZoom: 14
+		mapCenter: new L.LatLng(44.8442, -0.5733),
+		mapZoom: 15
 	},
 
 	/**
