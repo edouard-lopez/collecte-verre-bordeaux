@@ -173,6 +173,7 @@ gulp.task('wiredep', function () {
             	'bootstrap-sass-official',
             	'topojson',
             	'leaflet-src',
+            	'd3-plugins',
           	]
         }))
         .pipe(gulp.dest('app'));
