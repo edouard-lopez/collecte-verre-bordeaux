@@ -1,6 +1,10 @@
 # Dataviz CUB: point d'apports volontaires
 
-Dataviz project to visualize different type of trash collecting points in the area of Bordeaux, France.
+Cartographie des `913` points de collecte de la région CUB/Bordeaux-Métropole. 
+Elle permet de rapidement localiser les points les plus proches pour allez jeter les bouteilles vides suite à une 
+soirée ou un événement.  
+
+**en**: Dataviz to visualize different type of trash collecting points in the area of Bordeaux, France.
 
 ![dataviz preview](./preview.png)
 
