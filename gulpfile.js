@@ -1,36 +1,35 @@
 'use strict';
-// generated on 2014-06-25 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
 
 // @custom
 var project = {
-	name: 'collecte-verre-cub',
-	port: 9082,
-	livereloadPort: 56438
+    name: 'collecte-verre-cub',
+    port: 9082,
+    livereloadPort: 56438
 };
-var paths = {
+var pathes = {
     appDir: 'app',
     buildDir: 'dist',
     scripts: {
         dir: 'app/scripts',
-        src:  'app/scripts/**/*.js',
+        src: 'app/scripts/**/*.js',
         dest: 'dist/scripts'
     },
     styles: {
         dir: 'app/styles',
-        src:  'app/styles/**/*.scss',
+        src: 'app/styles/**/*.scss',
         dest: 'dist/styles'
     },
     images: {
         dir: 'app/images',
         src: 'app/images/**/*',
-        dest: 'dist/images',
+        dest: 'dist/images'
     },
     fonts: {
-    		dir: null,
-    		src: null,
-    		dest: 'dist/fonts'
+        dir: null,
+        src: null,
+        dest: 'dist/fonts'
     }
 };
 
@@ -49,16 +48,16 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(paths.scripts.dir+'/**/*.js')
+    return gulp.src(pathes.scripts.dir + '/**/*.js')
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
 });
 
 gulp.task('data', function () {
-	require('gulp-util').log(paths.scripts.dir+'/*.json');
-    return gulp.src(paths.scripts.dir+'/*.json')
-        .pipe(gulp.dest(paths.scripts.dest))
+    require('gulp-util').log(pathes.scripts.dir + '/*.json');
+    return gulp.src(pathes.scripts.dir + '/*.json')
+        .pipe(gulp.dest(pathes.scripts.dest))
         .pipe($.size());
 });
 
@@ -66,7 +65,7 @@ gulp.task('html', ['styles', 'scripts'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
-    return gulp.src(paths.appDir+'/*.html')
+    return gulp.src(pathes.appDir + '/*.html')
         .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
         .pipe(jsFilter)
         .pipe($.uglify())
@@ -76,18 +75,18 @@ gulp.task('html', ['styles', 'scripts'], function () {
         .pipe(cssFilter.restore())
         .pipe($.useref.restore())
         .pipe($.useref())
-        .pipe(gulp.dest(paths.buildDir))
+        .pipe(gulp.dest(pathes.buildDir))
         .pipe($.size());
 });
 
 gulp.task('images', function () {
-    return gulp.src(paths.images.dir+'/**/*')
+    return gulp.src(pathes.images.src)
         .pipe($.cache($.imagemin({
             optimizationLevel: 3,
             progressive: true,
             interlaced: true
         })))
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest(pathes.images.dest))
         .pipe($.size());
 });
 
@@ -95,17 +94,17 @@ gulp.task('fonts', function () {
     return $.bowerFiles()
         .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
         .pipe($.flatten())
-        .pipe(gulp.dest(paths.fonts.dest))
+        .pipe(gulp.dest(pathes.fonts.dest))
         .pipe($.size());
 });
 
 gulp.task('extras', ['data'], function () {
-    return gulp.src(['app/*.*', '!app/*.html'], { dot: true })
-        .pipe(gulp.dest(paths.buildDir));
+    return gulp.src(['app/*.*', '!app/*.html'], {dot: true})
+        .pipe(gulp.dest(pathes.buildDir));
 });
 
 gulp.task('clean', function () {
-    return gulp.src(['.tmp', paths.buildDir], { read: false }).pipe($.clean());
+    return gulp.src(['.tmp', pathes.buildDir], {read: false}).pipe($.clean());
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'extras']);
@@ -117,66 +116,66 @@ gulp.task('default', ['clean'], function () {
 gulp.task('connect', function () {
     var connect = require('connect');
     var app = connect()
-        .use(require('connect-livereload')({ port: project.livereloadPort }))
-        .use(connect.static('app'))
+        .use(require('connect-livereload')({port: project.livereloadPort}))
+        .use(connect.static(pathes.appDir))
         .use(connect.static('.tmp'))
-        .use(connect.directory('app'));
+        .use(connect.directory(pathes.appDir));
 
     require('http').createServer(app)
         .listen(project.port)
         .on('listening', function () {
-            console.log('Started connect web server on http://localhost:'+project.port);
+            console.log('Started connect web server on http://localhost:' + project.port);
         });
 });
 
 /*
-* @custom: add dependencies
-* 	* wiredep
-*/
+ * @custom: add dependencies
+ * 	* wiredep
+ */
 gulp.task('serve', ['wiredep', 'connect'], function () {
-    require('opn')('http://localhost:'+project.port);
+    require('opn')('http://localhost:' + project.port);
 });
 
 /*
-	@custom: usemin
+ @custom: usemin
  */
-gulp.task('usemin', function() {
-	var usemin = require('gulp-usemin');
-	var uglify = require('gulp-uglify');
-	var minifyHtml = require('gulp-minify-html');
-	var minifyCss = require('gulp-minify-css');
-	var rev = require('gulp-rev');
+gulp.task('usemin', function () {
+    var usemin = require('gulp-usemin');
+    var uglify = require('gulp-uglify');
+    var minifyHtml = require('gulp-minify-html');
+    var minifyCss = require('gulp-minify-css');
+    var rev = require('gulp-rev');
 
-  gulp.src('./*.html')
-    .pipe(usemin({
-      css: [minifyCss(), 'concat'],
-      html: [minifyHtml({empty: true})],
-      js: [uglify(), rev()]
-    }))
-    .pipe(gulp.dest('dist/'));
+    gulp.src('./*.html')
+        .pipe(usemin({
+            css: [minifyCss(), 'concat'],
+            html: [minifyHtml({empty: true})],
+            js: [uglify(), rev()]
+        }))
+        .pipe(gulp.dest(pathes.buildDir));
 });
 
 // inject bower components
 gulp.task('wiredep', function () {
     var wiredep = require('wiredep').stream;
 
-    gulp.src('app/styles/*.scss')
+    gulp.src(pathes.styles.src)
         .pipe(wiredep({
-            directory: paths.appDir+'/bower_components'
+            directory: pathes.appDir + '/bower_components'
         }))
-        .pipe(gulp.dest('app/styles'));
+        .pipe(gulp.dest(pathes.styles.dir));
 
-    gulp.src(paths.appDir+'/*.html')
+    gulp.src(pathes.appDir + '/*.html')
         .pipe(wiredep({
-            directory: paths.appDir+'/bower_components',
+            directory: pathes.appDir + '/bower_components',
             exclude: [
-            	'bootstrap-sass-official',
-            	'topojson',
-            	'leaflet-src',
-            	'd3-plugins',
-          	]
+                'bootstrap-sass-official',
+                'topojson',
+                'leaflet-src',
+                'd3-plugins',
+            ]
         }))
-        .pipe(gulp.dest('app'));
+        .pipe(gulp.dest(pathes.appDir));
 });
 
 gulp.task('watch', ['connect', 'serve'], function () {
@@ -185,39 +184,39 @@ gulp.task('watch', ['connect', 'serve'], function () {
     // watch for changes
 
     gulp.watch([
-        paths.appDir+'/*.html',
+        pathes.appDir + '/*.html',
         '.tmp/styles/**/*.css',
-        paths.scripts.dir+'/**/*.js',
-        paths.images.dir+'/**/*'
+        pathes.scripts.src,
+        pathes.images.src
     ]).on('change', function (file) {
         server.changed(file.path);
     });
 
-    gulp.watch(paths.styles.dir+'/**/*.scss', ['styles']);
-    gulp.watch(paths.scripts.dir+'/**/*.js', ['scripts']);
-    gulp.watch(paths.images.dir+'/**/*', ['images']);
+    gulp.watch(pathes.styles.src, ['styles']);
+    gulp.watch(pathes.scripts.src, ['scripts']);
+    gulp.watch(pathes.images.src, ['images']);
     gulp.watch('bower.json', ['wiredep']);
 });
 
 // @custom
-gulp.task('deploy', ['build'] , function() {
-	var rsync = require('rsyncwrapper').rsync;
-	var gutil = require('gulp-util');
+gulp.task('deploy', ['build'], function () {
+    var rsync = require('rsyncwrapper').rsync;
+    var gutil = require('gulp-util');
 
-	rsync({
-		ssh: true,
-		src: paths.buildDir+'/',
-		dest: '/srv/edouard-lopez/demo/'+project.name,
-		host: 'ed8@vm-ed',
-		port: '822',
-		recursive: true,
-		syncDest: true,
-		args: ['--verbose'],
-		exclude: ['.git*','*.scss','node_modules'],
-	}, function(error, stdout, stderr, cmd) {
-		gutil.log(cmd);
-		gutil.log(stdout);
-		gutil.log(error);
-		gutil.log(stderr);
-	});
+    rsync({
+        ssh: true,
+        src: pathes.buildDir + '/',
+        dest: '/srv/edouard-lopez/demo/' + project.name,
+        host: 'ed8@vm-ed',
+        port: '822',
+        recursive: true,
+        syncDest: true,
+        args: ['--verbose'],
+        exclude: ['.git*', '*.scss', 'node_modules']
+    }, function (error, stdout, stderr, cmd) {
+        gutil.log(cmd);
+        gutil.log(stdout);
+        gutil.log(error);
+        gutil.log(stderr);
+    });
 });
