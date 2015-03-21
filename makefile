@@ -133,7 +133,7 @@ app/scripts/location2adresses.json:
 # @projection: Lambert93 (EPSG:2154)
 .tmp/${dataFile}.shp.zip: .tmp
 	@printf "Fetching…\n\tEmplacements d'apport volontaire de la CUB data\n"
-	@curl --progress-bar --output $@ 'http://data.lacub.fr/files.php?layer=EN_EMPAC_P&ext=SHP_L93'
+	curl --progress-bar --output $@ 'http://data.bordeaux-metropole.fr/files.php?layer=EN_EMPAC_P&ext=SHP_L93'
 
 
 # Create .tmp/ directory if needed
