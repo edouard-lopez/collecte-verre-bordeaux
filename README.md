@@ -118,3 +118,8 @@ gulp watch
 ## Privacy
 
 The use of **geo-location is completely optional**. Being done client-side there is no data store or collected by this app.
+
+
+## Changelog
+
+* 2015-mar-21: update data add 9 new sites ;
