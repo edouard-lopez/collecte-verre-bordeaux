@@ -92,7 +92,7 @@ var pavMap = { // pav = point d'apport volontaire
 			radius,
 			{
 				color: '#3465a4',
-				fillColor: '#729fcf',
+				fillColor: '#729fcf'
 			}
 		).addTo(pav.map);
 	},
@@ -187,20 +187,19 @@ var pavMap = { // pav = point d'apport volontaire
 	 */
 	getPopupContent: function (d) {
 		return sprintf(
-			'<dl class="active-popup dl-horizontal">' +
-			'	<dt class="text-muted"><abbr title="adresse">addr.</abbr>:</dt>' +
-			'	<dd>%s</dd>' +
-			'	<dt class="text-muted"><abbr title="Ouvrir dans un nouvel onglet">coord.</abbr>:</dt>' +
-			'	<dd><a href="#c=%s&pav=%s&z=%d" target="_blank" class="share">%s <i class="fa fa-external-link"></i></a></dd>' +
-			'	<dt class="text-muted"><abbr title="numéro/code">code</abbr>:</dt>' +
-			'	<dd><small>%s</small></dd>' +
-			'</dl>',
+			'<div class="active-popup">' +
+			'	<h4>%s</h4>' +
+			'	<p><a href="#c=%s&pav=%s&z=%d" target="_blank" class="share">%s <i class="fa fa-external-link"></i></a>' +
+			'	<br/>' +
+			'	<small>%s</small>' +
+			'	</p>' +
+			'</div>',
 			d.label, d.latLng, d.id, d.zoom, d.latLng, d.id
 		);
 	},
 
 	/**
-	* Load data on the map
+	* Load data on the
 	* @param  {JSON} geojson data
 	* @return {pavMapObject} current object
 	*/
@@ -215,7 +214,7 @@ var pavMap = { // pav = point d'apport volontaire
 						return L.marker(latLng,
 							{
 								icon: pav.marker,
-								alt: '<placeholder>',
+								alt: '<placeholder>'
 							}
 						);
 					},
@@ -317,7 +316,7 @@ var pavMap = { // pav = point d'apport volontaire
 			center:  this.DEFAULT.center, // Bordeaux latitude/longitude
 			zoom: this.DEFAULT.zoom,
 			minZoom: 0,
-			maxZoom: 18,
+			maxZoom: 18
 		});
 		var pav = this; // look ugly
 		this.map.on('locationfound', function (e) { pav.onLocationFound(e, pav);} );
