@@ -60,7 +60,7 @@ app/scripts/location2adresses.json:
 
 
 # Reverse Geocoding: http://wiki.openstreetmap.org/wiki/Nominatim#Parameters_2
-# @alias: reverse-reverse-location2adresses
+# @alias: reverse-location2adresses
 # @format: JSON
 .tmp/reverse-location2adresses.json:
 	@printf "Fetching…\n\tAdresses\n"
