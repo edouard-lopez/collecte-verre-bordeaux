@@ -84,7 +84,7 @@ app/scripts/location2adresses.json:
 # @format: topoJSON
 .tmp/${dataFile}.topo.json:
 	@printf "Convert...\n\tGeoJSON → TopoJSON\n"
-	@topojson \
+	./node_modules/topojson/bin/topojson \
 		--id-property IDENT \
 		--quantization 1e4 \
 		--simplify-proportion 0.025 \
