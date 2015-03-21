@@ -192,9 +192,9 @@ var pavMap = { // pav = point d'apport volontaire
         return sprintf(
             '<div class="active-popup">' +
             '	<h4>%s</h4>' +
-            '	<p><a href="#c=%s&pav=%s&z=%d" target="_blank" class="share">%s <i class="fa fa-external-link"></i></a>' +
+            '	<p>partager: <a href="#c=%s&pav=%s&z=%d" target="_blank" class="share">%s <i class="fa fa-external-link"></i></a>' +
             '	<br/>' +
-            '	<small>%s</small>' +
+            '	<abbr title="référence">réf.</abbr>: <small>%s</small>' +
             '	</p>' +
             '</div>',
             d.label, d.latLng, d.id, d.zoom, d.latLng, d.id
