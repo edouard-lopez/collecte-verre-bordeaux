@@ -20,7 +20,8 @@ today=$(shell date '+%Y-%m-%d')
 dataFile=emplacements-pav
 
 .PHONY: default
-default:		install clean .tmp \
+default:    install update-data
+update-data:     clean .tmp \
 			.tmp/${dataFile}.shp.zip \
 			.tmp/${dataFile} \
 			.tmp/${dataFile}.geo.json \
