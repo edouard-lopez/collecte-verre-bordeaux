@@ -149,10 +149,10 @@ clean:
 # Install tooling and library
 install:
 	@printf "Installing system-wide (Ubuntu)…\n"
-	sudo apt-get -y install gdal-{bin,contrib}
-	sudo npm install -g topojson jq gulp generator-gulp-webapp
+	sudo apt-get -y install jq gdal-{bin,contrib}
+	sudo npm install -g gulp generator-gulp-webapp
 	@printf "Install project-wide (Ubuntu)…\n"
-	npm install --save-dev topojson generator-leaflet jq gulp
+	npm install --save-dev topojson generator-leaflet gulp
 	npm install --save-dev gulp-{usemin,uglify,minify-{html,css},rev}
 	yo gulp-webapp
 	bower install --save polymaps topojson font-awesome d3 d3-plugins

@@ -65,7 +65,7 @@ Start playing !
 
 
 ## Want to fork or scaffold a similar project ?
-
+1
 ### License
 
 The Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
@@ -73,9 +73,12 @@ The Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
 
 ### Tools: GDAL (Geospatial Data Abstraction Library)
 
-To manipulate Shapefile, you need to have [`ogr2ogr`](http://www.gdal.org/ogr2ogr.html) command line, install [GDAL library](http://www.gdal.org/) for that:
+To manipulate Shapefile, you need the command [`ogr2ogr`](http://www.gdal.org/ogr2ogr.html) command line, which is 
+part of [GDAL library](http://www.gdal.org/). For `JSON` manipulation you will need the [`jq` C-library]
+(https://stedolan.github.io/jq/) which is 
+avalaible in Linux repo:
 ```bash
-sudo apt-get install gdal-bin
+sudo apt-get install jq gdal-{bin,contrib}
 ```
 
 
