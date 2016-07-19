@@ -1,4 +1,4 @@
-# Dataviz CUB: point d'apports volontaires
+# Dataviz Bordeaux-Métropole: point d'apports volontaires
 
 Cartographie des `940` points de collecte de la région CUB/Bordeaux-Métropole. 
 Elle permet de rapidement localiser les points les plus proches pour allez jeter les bouteilles vides suite à une 
@@ -35,8 +35,8 @@ You may also find the website [Où recycler.fr](http://ourecycler.fr/point-colle
 
 Start by cloning the project repository:
 ```
-git clone https://github.com/edouard-lopez/collecte-verre-cub.git
-cd collecte-verre-cub
+git clone https://github.com/edouard-lopez/collecte-verre-bordeaux.git
+cd collecte-verre-bordeaux
 make install
 ```
 
