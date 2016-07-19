@@ -4,15 +4,19 @@
   "dependencies": {
     "bootstrap-sass-official": "~3.1.1",
     "jquery": "~1.11.0",
-    "topojson": "~1.6.18",
-    "font-awesome": "~4.3.0",
-    "d3": "~3.5.5",
+    "topojson": "^1.6.26",
+    "font-awesome": "^4.6.3",
+    "d3": "^4.1.1",
     "d3-plugins": "*",
     "leaflet": "~0.7.3",
     "es6-promise": "~1.0.0",
     "sprintf": "~1.0.0",
     "leaflet.markercluster": "~0.4.0",
-    "polymaps": "~2.5.1"
+    "polymaps": "^2.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "font-awesome": "^4.6.3",
+    "d3": "^4.1.1"
+  }
 }
