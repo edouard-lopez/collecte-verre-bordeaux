@@ -10,15 +10,15 @@ soirée ou un événement.
 
 <!-- MarkdownTOC depth=3 -->
 
-- Data Sources
-- Install
-	- Makefile
-	- Getting started
-- Want to fork or scaffold a similar project ?
-	- License
-	- Tools: GDAL (Geospatial Data Abstraction Library)
-	- JavaScript Libraries
-- Privacy
+- [Data Sources](#data-sources)
+- [Install](#install)
+	- [Makefile](#makefile)
+	- [Getting started](#getting-started)
+- [Want to fork or scaffold a similar project ?](#want-to-fork-or-scaffold-a-similar-project-?)
+	- [License](#license)
+	- [Tools: GDAL (Geospatial Data Abstraction Library)](#tools-gdal-geospatial-data-abstraction-library)
+	- [JavaScript Libraries](#javascript-libraries)
+- [Privacy](#privacy)
 
 <!-- /MarkdownTOC -->
 
@@ -34,21 +34,25 @@ You may also find the website [Où recycler.fr](http://ourecycler.fr/point-colle
 ## Install
 
 Start by cloning the project repository:
-```bash
+```
 git clone https://github.com/edouard-lopez/collecte-verre-cub.git
 cd collecte-verre-cub
+make install
 ```
-And install some tooling:
-```bash
-npm install -g yo bower grunt-cli gulp topojson
+
+This is the minimum to be able to build the app. If you want to dev, try:
+ 
 ```
+make install-development
+```
+
 ### Makefile
 
 There is a [makefile](./makefile) that automate the installation and data-mining tasks.
 
 The default task will build a working environment and process data, you only need to run `make` in the project root directory. That is the equivalent to run:
 
-```bash
+```
 make install clean .tmp
 make get-emplacements extract-emplacements convert2geojson convert2geojsonVanilla convert2topojson reverse-location2adresses fix-reverse-location
 ```
@@ -57,19 +61,19 @@ make get-emplacements extract-emplacements convert2geojson convert2geojsonVanill
 ### Getting started
 
 Install project dependecy using `npm` and `bower`:
-```bash
+```
 npm install
 bower install
 ```
 Run a preview with `gulp`:
-```bash
+```
 gulp serve
 ```
 Start playing !
 
 
 ## Want to fork or scaffold a similar project ?
-1
+
 ### License
 
 The Project under [GPLv3 license](http://choosealicense.com/licenses/gpl-3.0/).
@@ -81,7 +85,7 @@ To manipulate Shapefile, you need the command [`ogr2ogr`](http://www.gdal.org/og
 part of [GDAL library](http://www.gdal.org/). For `JSON` manipulation you will need the [`jq` C-library]
 (https://stedolan.github.io/jq/) which is 
 avalaible in Linux repo:
-```bash
+```
 sudo apt-get install jq gdal-{bin,contrib}
 ```
 
@@ -90,12 +94,12 @@ sudo apt-get install jq gdal-{bin,contrib}
 
 
 So start by installing [Gulp webapp generator](https://www.npmjs.org/package/generator-gulp-webapp) for `yeoman`:
-```bash
+```
 sudo npm install -g generator-gulp-webapp gulp
 ```
 
 Continue by scaffolding the application with the `yeoman`'s generator:
-```bash
+```
 mkdir my-map-app && cd my-map-app
 yo gulp-webapp
 ```
@@ -104,13 +108,13 @@ Then install others dependencies:
 * I'm using [LeafletJS for interactive map](http://leafletjs.com/) ;
 * and [`d3.js` for the dataviz](http://d3js.org/).
 
-```bash
+```
 npm install --save-dev jq xml2json-command topojson generator-gulp-webapp gulp gulp-sass
 bower install --save topojson font-awesome d3 leaflet leaflet.markercluster es6-promise
 ```
 
 Finish by running `gulp` for building and gulp watch for preview :
-```bash
+```
 gulp watch
 ```
 
