@@ -1,6 +1,6 @@
 # Dataviz CUB: point d'apports volontaires
 
-Cartographie des `913` points de collecte de la région CUB/Bordeaux-Métropole. 
+Cartographie des `940` points de collecte de la région CUB/Bordeaux-Métropole. 
 Elle permet de rapidement localiser les points les plus proches pour allez jeter les bouteilles vides suite à une 
 soirée ou un événement.  
 
@@ -126,4 +126,5 @@ The use of **geo-location is completely optional**. Being done client-side there
 
 ## Changelog
 
-* 2015-mar-21: update data add 9 new sites ;
+* 2016-juil.-19: from `913` to `940` entries ;
+* 2015-mar-21: update data add 9 new sites.
